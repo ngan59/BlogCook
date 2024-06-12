@@ -31,17 +31,15 @@ class DishController extends Controller
 
             ],
             [
-                'tittle.required' => 'Bạn chưa nhập tên thể loại',
+                'tittle.required' => 'Bạn chưa nhập tiêu đề',
                 'description.required' => 'Bạn chưa nhập nội dung',
                 'image.required' => 'Bạn chưa tải hình ảnh',
                 'id_category.required' => 'Bạn chưa nhập danh mục',
             ]
         );
-
-        $slug = Str::slug($request->title);
-
+        
         //2 slug trung nhau 
-        $slug = Str::slug($request->name);
+        $slug = Str::slug($request->title);
 
         $checkSlug = Category::where('slug', $slug)->first();
         //neu da ton tai slug nay thi se noi chuoi vao cho no
@@ -66,7 +64,7 @@ class DishController extends Controller
                 $image = Str::random(5) . "_" . $name_file;
 
                 while (file_exists("image/dish" . $image)) {
-                    $imagge = Str::random(5) . "_" . $name_file;
+                    $image = Str::random(5) . "_" . $name_file;
                 }
                 $file->move('image/dish', $image);
             }
@@ -111,15 +109,14 @@ class DishController extends Controller
             ]
         );
 
-        //2 slug trung nhau 
-        $slug = Str::slug($request->name);
-
-        $checkSlug = Category::where('slug', $slug)->first();
-        //neu da ton tai slug nay thi se noi chuoi vao cho no
+        $slug = Str::slug($request->title);
+        $checkSlug = Dish::where('slug', $slug)->first();
+       
         while ($checkSlug) {
-            $slug = $checkSlug->slug . Str::random(2);
+            $slug = $checkSlug->slug . Str::random(5);
         }
 
+        
         if ($request->hasFile('image')) {
             $file = $request->file('image');
             $name_file = $file->getClientOriginalName();

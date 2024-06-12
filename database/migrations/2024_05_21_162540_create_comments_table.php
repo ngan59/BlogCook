@@ -25,7 +25,11 @@ return new class extends Migration
         //user bi xoa thi bai viet (dish) cung se bi xoa
         $table->foreign('id_dish')->references('id')->on('dish')
         ->cashcadeOnDelete();
+
+        
         });
+
+        
     }
 
     /**

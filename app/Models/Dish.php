@@ -32,7 +32,7 @@ class Dish extends Model
     }
 
     public function comment(){
-        return $this->hasMany(Comment::class);
+        return $this->hasMany(Comment::class,'id_dish','id');
     }
     public function imageUrl()
     {

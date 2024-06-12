@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Dish;
 use Illuminate\Http\Request;
 use Validate;
 use Illuminate\Support\Str;
@@ -94,8 +95,8 @@ class CategoryController extends Controller
 
     public function delete($id)
     {
-        Category::where("id", $id)->delete();
-
+        Dish::where('id_category', $id)->delete();
+        Category::find($id)->delete();
         return redirect()->route("admin.category.index")->with("success", "Delete Successfully");
     }
 }

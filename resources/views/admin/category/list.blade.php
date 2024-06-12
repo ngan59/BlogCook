@@ -24,6 +24,7 @@
                             <tr align="center">
                                 <th>ID</th>                              
                                 <th>Name</th>
+                                <th>Slug</th>
                                 <th>Delete</th>
                                 <th>Edit</th>
                             </tr>
@@ -33,10 +34,10 @@
                           @foreach ($categories as $category)
 
                             <tr class="odd gradeX" align="center">
-                                <td>{{ $loop->iteration }}</td>
-                                {{-- <td>{{$category->id}}</td> --}}
+                                {{-- <td>{{ $loop->iteration }}</td> --}}
+                                <td>{{$category->id}}</td>
                                 <td>{{$category->name}}</td>
-                    
+                                <td>{{$category->slug}}</td>
                                 <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="{{route('admin.category.delete',$category->id)}}"> Delete</a></td>
                                 <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="{{route('admin.category.edit',$category->id)}}">Edit</a></td>
                             </tr>

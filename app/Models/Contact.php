@@ -9,8 +9,8 @@ class Contact extends Model
 {
     protected $table = 'contacts';
     protected $fillable = [
-       'name',
-       'address',
+        'name',
+        'address',
         'phone',
         'subject',
         'message',

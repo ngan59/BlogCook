@@ -285,7 +285,7 @@ a:focus {
 .navbar-inverse {
     color: #ffffff !important;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
-    background: rgba(0, 0, 0, 0) linear-gradient(to right, #0091e5 0px, #00b7e5 100%) repeat scroll 0 0 !important
+    background: rgba(0, 0, 0, 0) linear-gradient(to right, #76a4bf 0px, #76a4bf  100%) repeat scroll 0 0 !important
 }
 
 .gp-button.btn-primary:hover,

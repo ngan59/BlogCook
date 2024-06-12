@@ -28,6 +28,7 @@
                                 <th>Category</th>
                                 <th>Highlight</th>
                                 <th>New Post</th>
+                                {{-- <th>Manipulation</th> --}}
                                 <th>Delete</th>
                                 <th>Edit</th>
                             </tr>
@@ -43,6 +44,7 @@
                                 <td>{{$dish ->category->name}}</td>
                                 <td>{{$dish ->highlight_post == 1 ? "x" : ""}}</td>
                                 <td>{{$dish ->new_post == 1 ? "x" : ""}}</td>
+                                {{-- <th>{{$dish ->manipulation}}</th> --}}
                                 <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="{{route ('admin.dish.delete', $dish ->id)}}"> Delete</a></td>
                                 <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="{{route ('admin.dish.edit', $dish ->id)}}">Edit</a></td>
                             </tr>
