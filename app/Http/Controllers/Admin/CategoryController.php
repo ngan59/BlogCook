@@ -51,10 +51,11 @@ class CategoryController extends Controller
             'name' => $request->name,
             'slug' => Str::slug($request->name),
         ]);
-        return redirect()->route("admin.category.index")->with("success", "Create Successfully");
+        return redirect()->route("admin.category.index")->with("success", "Thêm danh mục thành công");
     }
     public function edit($id)
     {
+        //tìm category theo id
         $category = Category::find($id);
         return view("admin.category.edit", compact("category"));
     }
@@ -82,21 +83,21 @@ class CategoryController extends Controller
         }
 
         //sẽ tìm và update trực tiếp không cần tốn query
-        // $category = Category::find($id);
-        // $category = $category->update([
-        //     "name"=> $request->name, 
-        // ]);
-        Category::where("id", $id)->update([
+        $category = Category::find($id);
+        $category = $category->update([
             "name" => $request->name,
         ]);
+        // Category::where("id", $id)->update([
+        //     "name" => $request->name,
+        // ]);
 
-        return redirect()->route("admin.category.index")->with("success", "Update Successfully");
+        return redirect()->route("admin.category.index")->with("success", "Cập nhật danh mục thành công");
     }
 
     public function delete($id)
     {
         Dish::where('id_category', $id)->delete();
         Category::find($id)->delete();
-        return redirect()->route("admin.category.index")->with("success", "Delete Successfully");
+        return redirect()->route("admin.category.index")->with("success", "Xóa danh mục thành công");
     }
 }

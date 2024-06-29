@@ -7429,12 +7429,15 @@ a.bg-inverse:focus, a.bg-inverse:hover {
 .w-75 {
   width: 75% !important;
 }
+.w-90 {
+  width: 90% !important;
+}
 
 .w-100 {
   width: 100% !important;
 }
 
-.h-25 {
+.h-25 { 
   height: 25% !important;
 }
 
@@ -9318,3 +9321,38 @@ a.text-gray-dark:focus, a.text-gray-dark:hover {
   }
 }
 /*# sourceMappingURL=bootstrap.css.map */
+
+
+.carousel-container {
+    display: block;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.carousel-inner {
+    max-width: 90%;
+    /* Adjust the max-width as needed */
+    margin: auto;
+    /* Center the carousel within its container */
+}
+
+.custom-name {
+    color: #ffffff
+}
+
+.custom-description {
+    color: #ffffff
+}
+
+.custom-image {
+    max-width: 100%;
+    max-height: 500px;
+    /* Adjust the height as needed */
+    object-fit: cover;
+    /* Ensures the image covers the area */
+    border: 2px solid #ffffff;
+    /* Add a border around the image */
+    border-radius: 10px;
+    /* Optional: add rounded corners */
+}

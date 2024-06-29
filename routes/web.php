@@ -37,6 +37,10 @@ Route::group(['prefix' => 'admin', 'middleware' => 'checkadminLogin'], function 
     Route::put('profile', [AuthController::class, 'updateProfile'])
         ->name('admin.profile.update');
 
+    Route::prefix('dashboard')->group(function(){
+        Route::get('/',[DashboardController::class,'index'])
+            ->name('admin.dashboard.index');
+    }); 
 
     Route::prefix('category')->group(function () {
         Route::get('/', [CategoryController::class, 'index'])
@@ -164,16 +168,15 @@ Route::group(['prefix' => 'admin', 'middleware' => 'checkadminLogin'], function 
         Route::get('delete/{id}', [SlideController::class, 'delete'])
             ->name('admin.slide.delete');
     });
+        
+    // Route::post('/ckeditor/image-upload', 'Admin\DishController@uploadCkeditorImage')
+    // ->name('ckeditor.image-upload');
 
-    // Route::prefix('dashboard')->group(function(){
-    //     Route::get('/',[DashboardController::class,'index'])
-    //     ->name('admin.dashboard.index');
-
-
-});
+}); 
 
 // Home
-Route::get('/', [WebController::class, 'home']);
+Route::get('/', [WebController::class, 'home'])
+->name('web.home');
 
 /**lấy hết tất cả các danh mục */
 Route::get('category', [WebController::class, 'category']);
@@ -198,6 +201,6 @@ Route::post('contact', [WebController::class, 'sendContact'])
 Route::get('login',[LoginController::class,'formLogin']);
 
 Route::post('login',[LoginController::class,'login'])
-->name ('web.auth.login');
+    ->name ('web.auth.login');
 
 Route::get('logout', [LoginController::class, 'logout']);

@@ -6,8 +6,8 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Category Event
-                        <small>Add</small>
+                    <h1 class="page-header">Danh mục
+                        <small>Thêm</small>
                     </h1>
                     @if(count($errors))
                         <div class="alert alert-danger">
@@ -21,14 +21,15 @@
                 <!-- /.col-lg-12 -->
                 <div class="col-lg-7" style="padding-bottom:120px">
                     <!-- truyền hàm xử lý việc tạo category -->
-                    <form action="{{ route("admin.categoryevent.store") }}" method="POST">
+                    <form action="{{ route("admin.category.store") }}" method="POST">
                         @csrf
                         <div class="form-group">
-                            <label>Category Name</label>
-                            <input class="form-control" name="name" placeholder="Please Enter Category Name" />
+                            <label>Tên danh mục</label>
+                            <input class="form-control" name="name" placeholder="Nhập danh mục..." />
                         </div>
 
-                        <button type="submit" class="btn btn-default">Create</button>
+                        <button type="submit" class="btn btn-default">Thêm</button>
+                        <button type="reset" class="btn btn-default"><a href="{{route('admin.category.index')}}">Hủy bỏ</button>
                     </form>
                 </div>
             </div>

@@ -6,6 +6,7 @@ use App\Models\Dish;
 use App\Models\Comment;
 use App\Models\Contact;
 use App\Models\Category;
+use App\Models\Slide;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -14,11 +15,15 @@ class WebController extends Controller
 {
     public function home()
     {
-        $highlight = Dish::where("highlight_post", "1")
-            ->take(3)->get();
+        $highlight = Dish::where('highlight_post', 1)->where('status', 1)->get(); // Only get approved highlight posts
+        // $new = Dish::where('new_post', 1)->where('status', 1)->latest()->get(); // Only get approved new posts
+        // $highlight = Dish::where("highlight_post", "1")
+        //     ->take(3)->get();    
+        // $new = Dish::where("new_post", 1)->take(10)->get();
+        $slides = Slide::all();
+        $new = Dish::where('new_post',1)->where('status',1)->take(10)->get();
 
-        $new = Dish::where("new_post", 1)->take(10)->get();
-        return view("web.home", compact("highlight", "new"));
+        return view("web.home", compact("highlight", "new","slides"));
     }
 
     public function dish($slug)
@@ -36,6 +41,10 @@ class WebController extends Controller
             $comments = Comment::where('id_dish', $dish->id)->get();
         // $comment = Comment::where("id_dish",$dish->id)->paginate(10);
         return view('web.dish', compact('dish', 'relate', 'highlight','comments'));
+    }
+
+    public function slide(){
+
     }
 
     public function comment(Request $request, $id)
@@ -82,4 +91,6 @@ class WebController extends Controller
         Contact::create($request->all());
         return redirect()->route('web.contact')->with('success', 'Created contact successfully');
     }
+
+    
 }

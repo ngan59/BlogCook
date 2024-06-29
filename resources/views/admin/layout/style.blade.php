@@ -17,5 +17,20 @@
     <link href="/admin/bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        .stat-box {
+            border: 1px solid #ddd;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+            text-align: center;
+        }
 
-   
+        .stat-box h2 {
+            margin: 0;
+        }
+
+        .stat-box .fa {
+            font-size: 50px;
+        }
+    </style>

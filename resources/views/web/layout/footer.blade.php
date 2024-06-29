@@ -5,7 +5,7 @@
                 <div class="widget">
                     <div class="footer-text text-left">
                         <a href="index.html"><img src="/web/images/version/cook-footer-logo.png" alt="" class="img-fluid"></a>
-                        <p>Tech Blog is a technology blog, we sharing marketing, news and gadget articles.</p>
+                        <p>Blog Chia sẻ món ăn.</p>
                         <div class="social">
                             <a href="#" data-toggle="tooltip" data-placement="bottom" title="Facebook"><i class="fa fa-facebook"></i></a>
                             <a href="#" data-toggle="tooltip" data-placement="bottom" title="Twitter"><i class="fa fa-twitter"></i></a>
@@ -26,7 +26,7 @@
                 </div><!-- end widget -->
             </div><!-- end col -->
 
-            <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+            {{-- <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
                 <div class="widget">
                     <h2 class="widget-title">Popular Categories</h2>
                     <div class="link-widget">
@@ -39,7 +39,7 @@
                         </ul>
                     </div><!-- end link-widget -->
                 </div><!-- end widget -->
-            </div><!-- end col -->
+            </div><!-- end col --> --}}
 
             <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
                 <div class="widget">
@@ -60,7 +60,7 @@
         <div class="row">
             <div class="col-md-12 text-center">
                 <br>
-                <div class="copyright">&copy; Tech Blog. Design: <a href="http://html.design">HTML Design</a>.</div>
+                <div class="copyright">&copy; Đinh Thị Kim Ngân: <a href="https://stu.edu.vn/">Trường Đại học Công nghệ Sài Gòn</a>.</div>
             </div>
         </div>
     </div><!-- end container -->

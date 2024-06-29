@@ -23,23 +23,23 @@
                         <thead>
                             <tr align="center">
                                 <th>ID</th>                              
-                                <th>Name</th>
+                                <th>Tên danh mục</th>
                                 <th>Slug</th>
-                                <th>Delete</th>
-                                <th>Edit</th>
+                                <th>Xóa</th>
+                                <th>Sửa</th>
                             </tr>
                         </thead>
                         <tbody>
                             <!-- đổ data ra phần view -->
-                          @foreach ($categories as $category)
+                          @foreach ($categories as $key => $category)
 
                             <tr class="odd gradeX" align="center">
                                 {{-- <td>{{ $loop->iteration }}</td> --}}
-                                <td>{{$category->id}}</td>
+                                <td>{{$key}}</td>
                                 <td>{{$category->name}}</td>
                                 <td>{{$category->slug}}</td>
-                                <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="{{route('admin.category.delete',$category->id)}}"> Delete</a></td>
-                                <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="{{route('admin.category.edit',$category->id)}}">Edit</a></td>
+                                <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="{{route('admin.category.delete',$category->id)}}"> Xóa</a></td>
+                                <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="{{route('admin.category.edit',$category->id)}}">Sửa</a></td>
                             </tr>
 
                             

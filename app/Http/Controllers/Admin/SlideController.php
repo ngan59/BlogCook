@@ -11,7 +11,6 @@ class SlideController extends Controller
 {
     public function index()
     {
-        // $slides = Slide::all();
         $slides = Slide::orderBy('sortNumber')->get();
         return view("admin.slide.list", compact("slides"));
     }
@@ -23,61 +22,62 @@ class SlideController extends Controller
 
     public function store(Request $request)
     {
-        $data = $request->validate([
-            "name"=> "required",
-            "image"=> "required",
-            "description"=> "required",
-            "sortNumber"=> "required|integer",       
-        ],
-       [ 
-        'name.required' => 'Bạn chưa nhập tên slide',
-        'image.required' => 'Bạn chưa tải hình ảnh',
-        'description.required' => 'Bạn chưa nhập tên nội dụng',
-        'sortNumber.required' => 'Bạn chưa nhập số thứ tự',
-        'sortNumber.integer' => 'Số thứ tự phải là một số nguyên',
-        ]);
-        $image = null; 
+        $data = $request->validate(
+            [
+                "name" => "required",
+                // "image"=> "required|image|mimes:jpg,png,jpeg|max:2048",
+                'image' => 'required',
+                "description" => "required",
+                "sortNumber" => "required|integer|min:0",
+            ],
+            [
+                'name.required' => 'Bạn chưa nhập tên slide',
+                'image.required' => 'Bạn chưa tải hình ảnh',
+                'image.image' => 'Tập tin phải là hình ảnh',
+                'image.mimes' => 'Hình ảnh phải có định dạng jpg, png, jpeg',
+                'image.max' => 'Kích thước hình ảnh không được vượt quá 2MB',
+                'description.required' => 'Bạn chưa nhập tên nội dung',
+                'sortNumber.required' => 'Bạn chưa nhập số thứ tự',
+                'sortNumber.integer' => 'Số thứ tự phải là một số nguyên',
+                'sortNumber.min' => 'Số thứ tự phải là một số không âm',
+            ]
+        );
+
         if ($request->hasFile('image')) {
-            // Kiểm tra xem yêu cầu có chứa file với tên 'image' hay không
             $file = $request->file('image');
-            // Lấy file từ yêu cầu và gán cho biến $file
-        
             $name_file = $file->getClientOriginalName();
-            // Lấy tên gốc của file và gán cho biến $name_file
-        
+
             $extension = pathinfo($name_file, PATHINFO_EXTENSION);
-            // Lấy phần mở rộng của file (ví dụ: jpg, png) và gán cho biến $extension
-        
+
+
             if (
                 strnatcasecmp($extension, 'jpg') == 0
                 || strnatcasecmp($extension, 'png') == 0
-                || strnatcasecmp($extension, 'jepg') == 0
+                || strnatcasecmp($extension, 'jpeg') == 0
             ) {
-                // Kiểm tra xem phần mở rộng của file có phải là 'jpg', 'png', hoặc 'jepg' hay không (không phân biệt hoa thường)
-        
-                $image = Str::random(5) . "_" . $name_file;
-                // Tạo một tên file mới bằng cách nối chuỗi ngẫu nhiên dài 5 ký tự và tên gốc của file, gán cho biến $image
-        
-                while (file_exists("image/slide" . $image)) {
-                    // Kiểm tra xem file đã tồn tại trong thư mục 'image/dish' hay chưa
-                    $image = Str::random(5) . "_" . $name_file;
-                    // Nếu đã tồn tại, tạo lại tên file mới
-                }
-        
-                $file->move('image/slide', $image);
-                // Di chuyển file vào thư mục 'image/dish' với tên file mới
-            }
-        }
-        
 
-        $slide = Slide::create([
+
+                $image = Str::random(5) . "_" . $name_file;
+
+                while (file_exists("image/slide" . $image)) {
+                    $image = Str::random(5) . "_" . $name_file;
+                }
+                $file->move('image/slide', $image);
+            } else {
+                return redirect()->back()->withInput()->with("error", "Định dạng hình ảnh không hợp lệ");
+            }
+        } else {
+            return redirect()->back()->withInput()->with("error", "Không tải được hình ảnh");
+        }
+
+        Slide::create([
             'name' => $request->name,
             'image' => $image,
             'description' => $request->description,
             'sortNumber' => $request->sortNumber,
-
         ]);
-        return redirect()->route("admin.slide.index")->with("success", "Create Successfully");
+
+        return redirect()->route("admin.slide.index")->with("success", "Thêm slide thành công");
     }
 
     public function edit($id)
@@ -88,67 +88,58 @@ class SlideController extends Controller
 
     public function update(Request $request, $id)
     {
-        $data = $request->validate([
-            "name"=> "required",
-            "image"=> "required",
-            "description"=> "required",
-            "sortNumber"=> "required|integer",       
-        ],
-       [ 
-        'name.required' => 'Bạn chưa nhập tên slide',
-        'image.required' => 'Bạn chưa tải hình ảnh',
-        'description.required' => 'Bạn chưa nhập tên nội dụng',
-        'sortNumber.required' => 'Bạn chưa nhập số thứ tự',
-        'sortNumber.integer' => 'Số thứ tự phải là một số nguyên',
-        ]);
-        $image = null; 
+        $data = $request->validate(
+            [
+                "name" => "required",
+                "description" => "required",
+                "sortNumber" => "required|integer",
+            ],
+            [
+                'name.required' => 'Bạn chưa nhập tên slide',
+                'image.image' => 'Tập tin phải là hình ảnh',
+                'image.mimes' => 'Hình ảnh phải có định dạng jpg, png, jpeg',
+                'image.max' => 'Kích thước hình ảnh không được vượt quá 2MB',
+                'description.required' => 'Bạn chưa nhập tên nội dung',
+                'sortNumber.required' => 'Bạn chưa nhập số thứ tự',
+                'sortNumber.integer' => 'Số thứ tự phải là một số nguyên',
+            ]
+        );
+
+        $slide = Slide::find($id);
+
         if ($request->hasFile('image')) {
-            // Kiểm tra xem yêu cầu có chứa file với tên 'image' hay không
             $file = $request->file('image');
-            // Lấy file từ yêu cầu và gán cho biến $file
-        
             $name_file = $file->getClientOriginalName();
-            // Lấy tên gốc của file và gán cho biến $name_file
-        
             $extension = pathinfo($name_file, PATHINFO_EXTENSION);
-            // Lấy phần mở rộng của file (ví dụ: jpg, png) và gán cho biến $extension
-        
+
             if (
                 strnatcasecmp($extension, 'jpg') == 0
                 || strnatcasecmp($extension, 'png') == 0
                 || strnatcasecmp($extension, 'jepg') == 0
             ) {
-                // Kiểm tra xem phần mở rộng của file có phải là 'jpg', 'png', hoặc 'jepg' hay không (không phân biệt hoa thường)
-        
                 $image = Str::random(5) . "_" . $name_file;
-                // Tạo một tên file mới bằng cách nối chuỗi ngẫu nhiên dài 5 ký tự và tên gốc của file, gán cho biến $image
-        
                 while (file_exists("image/slide" . $image)) {
-                    // Kiểm tra xem file đã tồn tại trong thư mục 'image/dish' hay chưa
                     $image = Str::random(5) . "_" . $name_file;
-                    // Nếu đã tồn tại, tạo lại tên file mới
                 }
-        
                 $file->move('image/slide', $image);
-                // Di chuyển file vào thư mục 'image/dish' với tên file mới
+            } else {
+                return redirect()->back()->withInput()->with("error", "Định dạng hình ảnh không hợp lệ");
             }
         }
 
-        $slide = Slide::find($id);
         $slide->update([
-            'title' => $request->title,
+            'name' => $request->name,
             'image' => isset($image) ? $image : $slide->image,
             'description' => $request->description,
             'sortNumber' => $request->sortNumber,
         ]);
 
-        return redirect()->route("admin.slide.index")->with("success", "Update Successfully");
+        return redirect()->route("admin.slide.index")->with("success", "Cập nhật slide thành công");
     }
 
     public function delete($id)
     {
         Slide::where("id", $id)->delete();
-
-        return redirect()->route("admin.category.index")->with("success", "Delete Successfully");
+        return redirect()->route("admin.slide.index")->with("success", "Xóa slide thành công");
     }
 }

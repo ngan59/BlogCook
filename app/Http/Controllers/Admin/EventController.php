@@ -71,7 +71,7 @@ class EventController extends Controller
                 'eventcategories_id' => $request->eventcategories_id,
             ]
         );
-        return redirect()->route("admin.event.index")->with("success", "Create Successfully");
+        return redirect()->route("admin.event.index")->with("success", "Thêm sự kiện thành công");
     }
 
     public function edit($id)
@@ -131,12 +131,12 @@ class EventController extends Controller
             'eventcategories_id' => $request->eventcategories_id,
         ]);
 
-        return redirect()->route("admin.event.index", $id)->with("success", "Update Successfully");
+        return redirect()->route("admin.event.index", $id)->with("success", "Cập nhật sự kiện thành công");
     }
 
     public function delete($id)
     {
         Event::find($id)->delete();
-        return redirect()->route("admin.event.index", $id)->with("success", "Delete Successfully");
+        return redirect()->route("admin.event.index", $id)->with("success", "Xóa sự kiện thành công");
     }
 }

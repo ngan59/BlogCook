@@ -16,13 +16,13 @@
                         <thead>
                             <tr align="center">
                                 <th>ID</th>
-                                <th>Name</th>
+                                <th>Tên người dùng</th>
                                 <th>Email</th>
-                                <th>Role</th>
-                                <th>Follower</th>
-                                <th>Following</th>
-                                <th>Delete</th>
-                                <th>Edit</th>
+                                <th>Vai trò</th>
+                                <th>Người theo dõi</th>
+                                <th>Đang theo dõi</th>
+                                <th>Xóa</th>
+                                <th>Sửa</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -31,16 +31,11 @@
                                 <td>{{$user->id}}</td>
                                 <td>{{$user->name}}</td>
                                 <td>{{$user->email}}</td>
-                                <td>{{$user->role ? "Admin": "Member"}}</td>
+                                <td>{{$user->role ? "1": "0"}}</td>
                                 <td>{{$user->follower}}</td>
                                 <td>{{$user->following}}</td>
-                                <!-- <td>@if($user->role == 1)
-                                        {{"Admin"}}
-                                    @else
-                                        {{"Member"}}
-                                    @endif </td> -->
-                                <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="{{route('admin.user.delete', $user->id)}}"> Delete</a></td>
-                                <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="{{route('admin.user.edit', $user->id)}}">Edit</a></td>
+                                <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="{{route('admin.user.delete', $user->id)}}"> Xóa</a></td>
+                                <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="{{route('admin.user.edit', $user->id)}}">Sửa</a></td>
                             </tr>
                         @endforeach
                         </tbody>

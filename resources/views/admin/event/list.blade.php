@@ -22,12 +22,12 @@ Event
                         <thead>
                             <tr align="center">
                                 <th>ID</th>
-                                <th>Title</th>
-                                <th>Image</th>
-                                <th>Event Category</th>
-                                <th>Description</th>
-                                <th>Delete</th>
-                                <th>Edit</th>
+                                <th>Tiêu đề</th>
+                                <th>Hình ảnh</th>
+                                <th>Danh mục sự kiện</th>
+                                <th>Nội dung</th>
+                                <th>Xóa</th>
+                                <th>Sửa</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -40,8 +40,8 @@ Event
                                 </td>
                                 <td>{{$event ->categoryevent->name}}</td>
                                 <td>{!!$event->description !!}</td></td>
-                                <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="{{route ('admin.event.delete', $event ->id)}}"> Delete</a></td>
-                                <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="{{route ('admin.event.edit', $event ->id)}}">Edit</a></td>
+                                <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="{{route ('admin.event.delete', $event ->id)}}">Xóa</a></td>
+                                <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="{{route ('admin.event.edit', $event ->id)}}">Sửa</a></td>
                             </tr>
                             @endforeach
                         </tbody>

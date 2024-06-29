@@ -23,10 +23,10 @@
                         <thead>
                             <tr align="center">
                                 <th>ID</th>                              
-                                <th>Name</th>
+                                <th>Tên danh mục</th>
                                 {{-- <th>Title</th> --}}
-                                <th>Delete</th>
-                                <th>Edit</th>
+                                <th>Xóa</th>
+                                <th>Sửa</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -38,8 +38,8 @@
                                 {{-- <td>{{$category->id}}</td> --}}
                                 <td>{{$categoryevent->name}}</td>
                                 {{-- <td>{{$categoryevent->title}}</td> --}}
-                                <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="{{route('admin.categoryevent.delete',$categoryevent->id)}}"> Delete</a></td>
-                                <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="{{route('admin.categoryevent.edit',$categoryevent->id)}}">Edit</a></td>
+                                <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="{{route('admin.categoryevent.delete',$categoryevent->id)}}"> Xóa</a></td>
+                                <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="{{route('admin.categoryevent.edit',$categoryevent->id)}}">Sửa</a></td>
                             </tr>                           
                             @endforeach
                         </tbody>

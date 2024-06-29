@@ -7,8 +7,8 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">Category
-                            <small>Edit</small>
+                        <h1 class="page-header">Slide
+                            <small>Chỉnh sửa</small>
                         </h1>
                         @if(count($errors))
                         <div class="alert alert-danger">
@@ -23,26 +23,28 @@
                 </div>
                    
                     <!-- /.col-lg-12 -->
-                    <form action="{{ route("admin.category.update", $category -> id) }}" method="POST">
+                    <form action="{{ route("admin.slide.update", $slide -> id) }}" method="POST">
                         @csrf
                         @method ('put') 
                         <div class="form-group">
-                            <label>Name</label>
-                            <input class="form-control" name="name" placeholder="Please Enter Name" />
+                            <label>Tên slide</label>
+                            <input class="form-control" name="name" value ="{{$slide->name}}" placeholder="Nhập tên slide" />
                         </div>
                         <div class="form-group">
-                            <label>Image</label>
+                            <label>Hình ảnh slide</label>
                             <input type="file" class="form-control" name="image" accept="image/*" />
                         </div>
                         <div class="form-group">
-                            <label>Description</label>
-                            <input class="form-control" name="description" placeholder="Please Enter Description" />
+                            <label>Nội dung slide</label>
+                            <input class="form-control" name="description" value ="{{$slide->description}}"  placeholder="Nhập nội dung slide" />
                         </div>
                         <div class="form-group">
-                            <label>SortNumber</label>
-                            <input class="form-control" name="sortnumber" type="number" placeholder="Please Enter SortNumber" />
+                            <label>Số thứ tự slide</label>
+                            <input class="form-control" name="sortNumber" value ="{{$slide->sortNumber}}" type="number" placeholder="Nhập số thứ tự slide" />
                         </div>
-                        <button type="submit" class="btn btn-default">Update</button>
+                        <button type="submit" class="btn btn-default">Cập nhật</button>
+                        <button type="reset" class="btn btn-default">Hủy bỏ</button>
+                        <button type="reset" class="btn btn-default"> <a href="{{ route('admin.slide.index')}}">Quay lại </a></button>
                     </form>
                 </div>
                 <!-- /.row -->

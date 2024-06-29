@@ -23,11 +23,11 @@ class LoginController extends Controller
 
         // Attempt to login
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
-            return redirect('/')->with('success', 'Logged in successfully');
+            return redirect('/')->with('success', 'Đăng nhập thành công');
         }
 
         // Redirect back with an error message
-        return redirect()->route('web.auth.login')->with('error', 'Invalid email or password');
+        return redirect()->route('web.auth.login')->with('error', 'Email hoặc mật khẩu không hợp lệ');
     }
 
     public function logout()

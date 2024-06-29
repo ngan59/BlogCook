@@ -15,6 +15,7 @@
 <meta name="author" content="">
 
 @include('web.layout.style')
+
 @stack('styles')
 </head>
 <body>

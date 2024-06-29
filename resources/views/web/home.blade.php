@@ -1,286 +1,182 @@
 @extends('web.layout.master')
 
 @section('content')
-
-<section class="section first-section">
-    <div class="container-fluid">
-        <div class="masonry-blog clearfix">
-            {{-- dung key de phan biet su dung class nao --}}
-            @foreach ($highlight as $key =>$dish)
-            @if ($key == 0)
-                <div class="first-slot">
-            @elseif ($key == 1 )
-                <div class="second-slot">   
-            @elseif ($key == 2 )    
-                <div class="last-slot">
-            @endif              
-           
-                <div class="masonry-box post-media">
-                     <img src="{{ $dish->imageUrl()}}" alt="" class="img-fluid">
-                     <div class="shadoweffect">
-                        <div class="shadow-desc">
-                            <div class="blog-meta">
-                                {{-- truyen danh muc bai viet vao
-                                    slug cua category: se dung bai viet tro qua danh muc(nghia la dang dung o danh muc san pham)) --}}
-                                <span class="bg-orange"><a href="{{ route('web.category', $dish->category->slug) }}" title="">{{ $dish->category->name }}</a></span>                                
-                                    {{-- bai viet --}}
-                                <h4><a href="{{route ('web.dish', $dish->slug )}}" title="">{{$dish->title}}</a></h4>
-                                {{-- ngay thang cacbon laravel --}}
-                                <small>{{\Carbon\Carbon::parse($dish->create_at)->format('d-m-Y')}}</small>
-
-                                <small>{{$dish->user->name}}</small>
-                            </div><!-- end meta -->
-                        </div><!-- end shadow-desc -->
-                    </div><!-- end shadow -->
-                </div><!-- end post-media -->
-            </div><!-- end first-side -->
-            @endforeach
-        </div><!-- end masonry -->
-    </div>
-</section>
-
-<section class="section">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="page-wrapper">
-                    <div class="blog-top clearfix">
-                        <h4 class="pull-left">Recent Dishs <a href="#"><i class="fa fa-rss"></i></a></h4>
-                    </div><!-- end blog-top -->
-
-                    @foreach($new as $dish)
-                    <div class="blog-list clearfix">
-                        <div class="blog-box row">
-                            <div class="col-md-4">
-                                <div class="post-media">
-                                    <a href="{{route('web.dish',$dish->slug) }}" title="">
-                                        <img src="{{$dish->imageUrl()}}" alt="" class="img-fluid">
-                                        <div class="hovereffect"></div>
-                                    </a>
-                                </div><!-- end media -->
-                            </div><!-- end col -->
-
-                            <div class="blog-meta big-meta col-md-8">
-                                <h4><a href="{{route('web.dish',$dish->slug)}}" title="">{{$dish->title}}</a></h4>
-                                {{-- <p>{{$dish->description}}</p> --}}
-                                <small class="firstsmall"><a class="bg-orange" href="{{route('web.category',$dish->category->slug) }}" title="">{{$dish->category->name}}</a></small>
-                                <small>{{\Carbon\Carbon::parse($dish->create_at)->format('d-m-Y')}}</small>
-
-                                <small>{{$dish->user->name}}</small>
-                                <small><a href="tech-single.html" title=""><i class="fa fa-eye"></i>{{$dish->view_count}}</a></small>
-                            </div><!-- end meta -->
-                        </div><!-- end blog-box -->
-                    </div>
-
-                        <hr class="invis">
+    <!-- Carousel/Slider Section -->
+    <!-- Carousel/Slider Section -->
+    <!-- Carousel/Slider Section -->
+    <section class="section first-section">
+        <div class="carousel-container">
+            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    @foreach ($slides as $key => $slide)
+                        <li data-target="#carouselExampleIndicators" data-slide-to="{{ $key }}"
+                            @if ($key == 0) class="active @endif"></li>
                     @endforeach
-                    </div> <!--end page-wrapper -->
-                {{-- Phan trang --}}
-{{-- 
-                <hr class="invis">
+                </ol>
+                <div class="carousel-inner">
+                    @foreach ($slides as $key => $slide)
+                        <div class="carousel-item @if ($key == 0) active @endif">
+                            <img src="{{ asset('/image/slide/' . $slide->image) }}" class="d-block w-100 custom-image"
+                                alt="Slide Image">
+                            <div class="carousel-caption d-none d-md-block">
 
-                <div class="row">
-                    <div class="col-md-12">
-                        <nav aria-label="Page navigation">
-                            <ul class="pagination justify-content-start">
-                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#">Next</a>
-                                </li>
-                            </ul>
-                        </nav>
-                    </div><!-- end col -->
-                </div><!-- end row --> --}}
-            </div><!-- end col -->
-
-            {{-- <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
-                <div class="sidebar">
-                    <div class="widget">
-                        <div class="banner-spot clearfix">
-                            <div class="banner-img">
-                                <img src="/web/upload/banner_07.jpg" alt="" class="img-fluid">
-                            </div><!-- end banner-img -->
-                        </div><!-- end banner -->
-                    </div><!-- end widget -->
-
-                    <div class="widget">
-                        <h2 class="widget-title">Trend Videos</h2>
-                        <div class="trend-videos">
-                            <div class="blog-box">
-                                <div class="post-media">
-                                    <a href="tech-single.html" title="">
-                                        <img src="/web/upload/tech_video_01.jpg" alt="" class="img-fluid">
-                                        <div class="hovereffect">
-                                            <span class="videohover"></span>
-                                        </div><!-- end hover -->
-                                    </a>
-                                </div><!-- end media -->
-                                <div class="blog-meta">
-                                    <h4><a href="tech-single.html" title="">We prepared the best 10 laptop presentations for you</a></h4>
-                                </div><!-- end meta -->
-                            </div><!-- end blog-box -->
-
-                            <hr class="invis">
-
-                            <div class="blog-box">
-                                <div class="post-media">
-                                    <a href="tech-single.html" title="">
-                                        <img src="/web/upload/tech_video_02.jpg" alt="" class="img-fluid">
-                                        <div class="hovereffect">
-                                            <span class="videohover"></span>
-                                        </div><!-- end hover -->
-                                    </a>
-                                </div><!-- end media -->
-                                <div class="blog-meta">
-                                    <h4><a href="tech-single.html" title="">We are guests of ABC Design Studio - Vlog</a></h4>
-                                </div><!-- end meta -->
-                            </div><!-- end blog-box -->
-
-                            <hr class="invis">
-
-                            <div class="blog-box">
-                                <div class="post-media">
-                                    <a href="tech-single.html" title="">
-                                        <img src="/web/upload/tech_video_03.jpg" alt="" class="img-fluid">
-                                        <div class="hovereffect">
-                                            <span class="videohover"></span>
-                                        </div><!-- end hover -->
-                                    </a>
-                                </div><!-- end media -->
-                                <div class="blog-meta">
-                                    <h4><a href="tech-single.html" title="">Both blood pressure monitor and intelligent clock</a></h4>
-                                </div><!-- end meta -->
-                            </div><!-- end blog-box -->
-                        </div><!-- end videos -->
-                    </div><!-- end widget -->
-
-                    <div class="widget">
-                        <h2 class="widget-title">Popular Posts</h2>
-                        <div class="blog-list-widget">
-                            <div class="list-group">
-                                <a href="tech-single.html" class="list-group-item list-group-item-action flex-column align-items-start">
-                                    <div class="w-100 justify-content-between">
-                                        <img src="/web/upload/tech_blog_08.jpg" alt="" class="img-fluid float-left">
-                                        <h5 class="mb-1">5 Beautiful buildings you need..</h5>
-                                        <small>12 Jan, 2016</small>
-                                    </div>
-                                </a>
-
-                                <a href="tech-single.html" class="list-group-item list-group-item-action flex-column align-items-start">
-                                    <div class="w-100 justify-content-between">
-                                        <img src="/web/upload/tech_blog_01.jpg" alt="" class="img-fluid float-left">
-                                        <h5 class="mb-1">Let's make an introduction for..</h5>
-                                        <small>11 Jan, 2016</small>
-                                    </div>
-                                </a>
-
-                                <a href="tech-single.html" class="list-group-item list-group-item-action flex-column align-items-start">
-                                    <div class="w-100 last-item justify-content-between">
-                                        <img src="/web/upload/tech_blog_03.jpg" alt="" class="img-fluid float-left">
-                                        <h5 class="mb-1">Did you see the most beautiful..</h5>
-                                        <small>07 Jan, 2016</small>
-                                    </div>
-                                </a>
-                            </div>
-                        </div><!-- end blog-list -->
-                    </div><!-- end widget -->
-
-                    <div class="widget">
-                        <h2 class="widget-title">Recent Reviews</h2>
-                        <div class="blog-list-widget">
-                            <div class="list-group">
-                                <a href="tech-single.html" class="list-group-item list-group-item-action flex-column align-items-start">
-                                    <div class="w-100 justify-content-between">
-                                        <img src="/web/upload/tech_blog_02.jpg" alt="" class="img-fluid float-left">
-                                        <h5 class="mb-1">Banana-chip chocolate cake recipe..</h5>
-                                        <span class="rating">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                        </span>
-                                    </div>
-                                </a>
-
-                                <a href="tech-single.html" class="list-group-item list-group-item-action flex-column align-items-start">
-                                    <div class="w-100 justify-content-between">
-                                        <img src="/web/upload/tech_blog_03.jpg" alt="" class="img-fluid float-left">
-                                        <h5 class="mb-1">10 practical ways to choose organic..</h5>
-                                        <span class="rating">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                        </span>
-                                    </div>
-                                </a>
-
-                                <a href="tech-single.html" class="list-group-item list-group-item-action flex-column align-items-start">
-                                    <div class="w-100 last-item justify-content-between">
-                                        <img src="/web/upload/tech_blog_07.jpg" alt="" class="img-fluid float-left">
-                                        <h5 class="mb-1">We are making homemade ravioli..</h5>
-                                        <span class="rating">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                        </span>
-                                    </div>
-                                </a>
-                            </div>
-                        </div><!-- end blog-list -->
-                    </div><!-- end widget -->
-
-                    <div class="widget">
-                        <h2 class="widget-title">Follow Us</h2>
-
-                        <div class="row text-center">
-                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
-                                <a href="#" class="social-button facebook-button">
-                                    <i class="fa fa-facebook"></i>
-                                    <p>27k</p>
-                                </a>
-                            </div>
-
-                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
-                                <a href="#" class="social-button twitter-button">
-                                    <i class="fa fa-twitter"></i>
-                                    <p>98k</p>
-                                </a>
-                            </div>
-
-                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
-                                <a href="#" class="social-button google-button">
-                                    <i class="fa fa-google-plus"></i>
-                                    <p>17k</p>
-                                </a>
-                            </div>
-
-                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
-                                <a href="#" class="social-button youtube-button">
-                                    <i class="fa fa-youtube"></i>
-                                    <p>22k</p>
-                                </a>
+                                <p class="custom-name">{{ $slide->name }}</p>
+                                <h5 class="custom-description">{{ $slide->description }}</h5>
                             </div>
                         </div>
-                    </div><!-- end widget -->
+                    @endforeach
+                </div>
 
-                    <div class="widget">
-                        <div class="banner-spot clearfix">
-                            <div class="banner-img">
-                                <img src="/web/upload/banner_03.jpg" alt="" class="img-fluid">
-                            </div><!-- end banner-img -->
-                        </div><!-- end banner -->
-                    </div><!-- end widget -->
-                </div><!-- end sidebar -->
-            </div><!-- end col --> --}}
+                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
 
-        </div><!-- end row -->
-    </div><!-- end container -->
-</section>
+
+    </section>
+
+
+
+    <!-- Highlighted Dishes Section -->
+    {{-- <section class="section">
+        <div class="container-fluid">
+            <div class="masonry-blog row justify-content-center clearfix">
+                @foreach ($highlight as $key => $dish)
+                    @if ($key == 0)
+                        <div class="first-slot">
+                        @elseif ($key == 1)
+                            <div class="second-slot">
+                            @elseif ($key == 2)
+                                <div class="last-slot">
+                    @endif
+
+                    <div class="masonry-box post-media">
+                        <img src="{{ $dish->imageUrl() }}" alt="" class="img-fluid">
+                        <div class="shadoweffect">
+                            <div class="shadow-desc">
+                                <div class="blog-meta">
+                                    <span class="bg-orange">
+                                        <a href="{{ route('web.category', $dish->category->slug) }}"
+                                            title="">{{ $dish->category->name }}</a>
+                                    </span>
+                                    <h4
+                                        style="font-size:20px; white-space: unset; width: 300px !important; overflow: hidden; text-overflow: ellipsis;">
+                                        <a href="{{ route('web.dish', $dish->slug) }}"
+                                            title="">{{ $dish->title }}</a>
+                                    </h4>
+                                    <small>{{ \Carbon\Carbon::parse($dish->created_at)->format('d-m-Y') }}</small>
+                                    <small>{{ $dish->user->name }}</small>
+                                </div><!-- end meta -->
+                            </div><!-- end shadow-desc -->
+                        </div><!-- end shadow -->
+                    </div><!-- end post-media -->
+
+            </div><!-- end .first-slot/.second-slot/.last-slot -->
+            @endforeach
+        </div><!-- end masonry -->
+        </div><!-- end container-fluid -->
+    </section> --}}
+
+    <section class="section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-9">
+                    <div class="page-wrapper">
+                        <div class="blog-top clearfix">
+                            <h4 class="pull-left">Công thức gần đây <a href="#"><i class="fa fa-rss"></i></a></h4>
+                        </div><!-- end blog-top -->
+                        @foreach ($new as $dish)
+                            <div class="blog-list clearfix">
+                                <div class="blog-box row">
+                                    <div class="col-md-4">
+                                        <div class="post-media">
+                                            <a href="{{ route('web.dish', $dish->slug) }}" title="">
+                                                <img src="{{ $dish->imageUrl() }}" alt="" class="img-fluid">
+                                                <div class="hovereffect"></div>
+                                            </a>
+                                        </div><!-- end media -->
+                                    </div><!-- end col -->
+
+                                    <div class="blog-meta big-meta col-md-8">
+                                        <h4 style="margin-left: 0px !important; padding: 12px 0px !important;"><a
+                                                href="{{ route('web.dish', $dish->slug) }}"
+                                                title="">{{ $dish->title }}</a></h4>
+                                        <p>{{ $dish->summary }}</p>
+                                        <small class="firstsmall"><a class="bg-orange"
+                                                href="{{ route('web.category', $dish->category->slug) }}"
+                                                title="">{{ $dish->category->name }}</a></small>
+                                        <small>{{ \Carbon\Carbon::parse($dish->created_at)->format('d-m-Y') }}</small>
+                                        <small>{{ $dish->user->name }}</small>
+                                        <small><i class="fa fa-eye"></i> {{ $dish->view_count }}</small>
+                                    </div><!-- end meta -->
+                                </div><!-- end blog-box -->
+                            </div>
+
+                            <hr class="invis">
+                        @endforeach
+                    </div><!-- end page-wrapper -->
+
+                                   <hr class="invis">
+
+                                   {{-- <div class="row">
+                                       <div class="col-md-12">
+                                           <nav aria-label="Page navigation">
+                                               <ul class="pagination justify-content-start">
+                                                   <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                                   <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                                   <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                                   <li class="page-item">
+                                                       <a class="page-link" href="#">Next</a>
+                                                   </li>
+                                               </ul>
+                                           </nav>
+                                       </div><!-- end col -->
+                                   </div><!-- end row --> --}}
+                </div><!-- end col -->
+
+              <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+                    <div class="sidebar"> 
+                        <div class="widget">
+                            <div class="input-group custom-search-form">
+                                <input type="text" class="form-control" placeholder="Tìm kiếm...">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" style ="border-radius: 0 5px 5px 0" type="button">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </span>
+                            </div>
+                         </div><!-- end widget -->
+
+                        <div class="widget">
+                            <h2 class="widget-title">Các bài viết nổi bật</h2>
+                            <div class="trend-videos">
+                                @foreach ($highlight as $item)
+                                    <div class="blog-box">
+                                        <div class="post-media">
+                                            <a href="{{ route('web.dish', $item->slug) }}" title="">
+                                                <img src="{{ $item->imageUrl() }}" alt="" class="img-fluid">
+                                                <div class="hovereffect">
+                                                    <span class="videohover"></span>
+                                                </div><!-- end hover -->
+                                            </a>
+                                        </div><!-- end media -->
+                                        <div class="blog-meta">
+                                            <h4><a href="{{ route('web.dish', $item->slug) }}" title="">{{ $item->title }}</a></h4>
+                                        </div><!-- end meta -->
+                                    </div><!-- end blog-box -->
+    
+                                    <hr class="invis">
+                                @endforeach
+                            </div><!-- end videos -->
+                        </div><!-- end widget -->
+
+                    </div><!-- end row -->
+                </div><!-- end container -->
+    </section>
 @endsection

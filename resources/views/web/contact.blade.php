@@ -7,7 +7,7 @@
                 <div class="col-lg-12">
                     <div class="page-wrapper">
                         <div class="row">
-                            @if(session('success'))
+                            @if (session('success'))
                                 <div class="col-lg-12">
                                     <div class="alert alert-success">
                                         {{ session('success') }}
@@ -15,14 +15,15 @@
                                 </div>
                             @endif
                             <div class="col-lg-5">
-                                <h4>Who we are</h4>
-                                <p>Tech Blog is a personal blog for handcrafted, cameramade photography content, fashion styles from independent creatives around the world.</p>
+                                <h4>Chúng tôi là ai ?</h4>
+                                <p>Cooking tutorial blog là một blog chuyên cung cấp các hướng dẫn nấu ăn, công thức nấu ăn,
+                                    mẹo và kỹ thuật nấu nướng. Blog này thường được viết bởi những người đam mê ẩm thực, đầu
+                                    bếp chuyên nghiệp, hoặc những người thích chia sẻ kinh nghiệm nấu ăn của mình.
+                                </p>
+                                <h4>Chúng tôi có thể giúp gì?</h4>
+                                <p>Với niềm đam mê nấu nướng và muốn học hỏi, nâng cao kĩ năng nấu nướng của mình. Blog có đầy đủ các món ăn và các bài viết tiện ích có thể giúp các bạn trau dồi thêm.
+                                </p>
 
-                                <h4>How we help?</h4>
-                                <p>Etiam vulputate urna id libero auctor maximus. Nulla dignissim ligula diam, in sollicitudin ligula congue quis turpis dui urna nibhs. </p>
-
-                                <h4>Pre-Sale Question</h4>
-                                <p>Fusce dapibus nunc quis quam tempor vestibulum sit amet consequat enim. Pellentesque blandit hendrerit placerat. Integertis non.</p>
                             </div>
                             <div class="col-lg-7">
                                 <form class="form-wrapper" action="{{ route('web.contact.store') }}" method="post">
@@ -32,7 +33,8 @@
                                     <input type="text" name="phone" class="form-control" placeholder="Phone">
                                     <input type="text" name="subject" class="form-control" placeholder="Subject">
                                     <textarea class="form-control" name="message" placeholder="Your message"></textarea>
-                                    <button type="submit" class="btn btn-primary">Send <i class="fa fa-envelope-open-o"></i></button>
+                                    <button type="submit" class="btn btn-primary">Send <i
+                                            class="fa fa-envelope-open-o"></i></button>
                                 </form>
                             </div>
                         </div>

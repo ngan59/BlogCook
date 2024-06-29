@@ -17,7 +17,7 @@ class ContactController extends Controller
     public function delete( $id)
     {
         Contact::find( $id )->delete();
-        return redirect()->route('admin.contact.index', $id)->with('success',  'Deleted Successfully');
+        return redirect()->route('admin.contact.index', $id)->with('success',  'Xóa liên hệ thành công');
 
     }
 }

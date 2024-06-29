@@ -6,8 +6,8 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Dish
-                        <small>Add</small>
+                    <h1 class="page-header">Công thức món ăn
+                        <small>Thêm</small>
                     </h1>
                     @if(count($errors))
                         <div class="alert alert-danger">
@@ -22,7 +22,7 @@
                     <form action="{{ route('admin.dish.store') }}" method="POST" enctype="multipart/form-data" >
                         @csrf
                         <div class="form-group">
-                            <label>Category</label>
+                            <label>Danh mục</label>
                             
                             <select class="form-control" name="id_category" >
                                 @foreach ($categories as $category)
@@ -32,30 +32,51 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label>Title</label>
-                            <input class="form-control" name="title" id="title" onkeyup="ChangeToSlug()" placeholder="Please Enter Title" />
+                            <label>Tiêu đề</label>
+                            <input class="form-control" name="title" id="title" onkeyup="ChangeToSlug()" placeholder="Bạn hãy nhập tiêu đề công thức" />
+                        </div>
+                        <div class="form-group">
+                            <label>Tóm tắt</label>
+                            <textarea class="form-control" name="summary" id="summary" placeholder="Bạn hãy nhập tóm tắt công thức"></textarea>
                         </div>
                         <div class="form-group">
                             <label>Slug</label>
-                            <input class="form-control" name="slug" id="slug" placeholder=" " readonly  />
+                            <input class="form-control" name="slug" id="slug" placeholder=" " readonly />
                         </div>
+                        <td>
+                            <div class="form-group">
+                                <label for="exampleForControlSelect2">Trạng thái</label>
+                                <select class="form-control" name="status">
+                                    <option value="1" > Duyệt</option>
+                                    <option value="2" > Không duyệt</option>
+                                </select>
+                            </div>
+                        </td>
                         <div class="form-group">
-                            <label>New Post</label>
+                            <label>Bài viết mới</label>
                             <input type="checkbox" name="new_post" />
                         </div>
                         <div class="form-group">
-                            <label>Highlight Post</label>
+                            <label>Bài viết nổi bật</label>
                             <input type="checkbox" name="highlight_post" />
                         </div>
                         <div class="form-group">
-                            <label>Image</label>
+                            <label>Hình ảnh</label>
                             <input type="file" class="form-control" name="image" accept="image/*" />
                         </div>
                             <div class="form-group">
-                                <label>Description</label>
-                                <textarea id="description" name="description" class="ckeditor"></textarea>
+                                <label>Nội dung</label>
+                                <textarea id="editor1" name="description" class="ckeditor"></textarea>
+                                {{-- <script>
+                                    CKEDITOR.replace('editor1', {
+                                        filebrowserUploadUrl: "{{ route('ckeditor.image-upload') }}",
+                                        filebrowserUploadMethod: 'form',
+                                        height: 300 // chiều cao của editor
+                                    });
+                                </script> --}}
                             </div>
-                        <button type="submit" class="btn btn-default">Add</button>
+                        <button type="submit" class="btn btn-default">Thêm công thức</button>
+                        <button type="reset" class="btn btn-default"><a href="{{route('admin.dish.index')}}">Hủy bỏ</button>
                     </form>
                 </div>
             </div>

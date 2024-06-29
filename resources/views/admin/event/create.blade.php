@@ -6,8 +6,8 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Event
-                        <small>Add</small>
+                    <h1 class="page-header">Sự kiện
+                        <small>Thêm</small>
                     </h1>
                     @if(count($errors))
                         <div class="alert alert-danger">
@@ -22,7 +22,7 @@
                     <form action="{{ route('admin.event.store') }}" method="POST" enctype="multipart/form-data" >
                         @csrf
                         <div class="form-group">
-                            <label>Category</label>
+                            <label>Danh mục</label>
                             
                             <select class="form-control" name="eventcategories_id" >
                                 @foreach ($categoriesevent as $categoryevent)
@@ -32,18 +32,19 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label>Title</label>
-                            <input class="form-control" name="title" placeholder="Please Enter Title Event" />
+                            <label>Tiêu đề</label>
+                            <input class="form-control" name="title" placeholder="Nhập tiêu đề sự kiện" />
                         </div>
                         <div class="form-group">
-                            <label>Image</label>
+                            <label>Hình ảnh</label>
                             <input type="file" class="form-control" name="image" accept="image/*" />
                         </div>
                             <div class="form-group">
-                                <label>Description</label>
+                                <label>Nội dung</label>
                                 <textarea id="description" name="description" class="ckeditor" ></textarea>
                             </div>
-                        <button type="submit" class="btn btn-default">Add</button>
+                        <button type="submit" class="btn btn-default">Thêm</button>
+                        <button type="reset" class="btn btn-default"><a href="{{route('admin.event.index')}}">Hủy bỏ</button>
                     </form>
                 </div>
             </div>

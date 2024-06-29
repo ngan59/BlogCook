@@ -2,53 +2,64 @@
 
 @section('content')
 
-    <div id="page-wrapper">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1 class="page-header">Profile User
-                        <small>Edit</small>
-                    </h1>
-                    @if(count($errors))
-                        <div class="alert alert-danger">
-                            @foreach($errors->all() as $err)
-                                {{ $err }}
-                            @endforeach
-                        </div>
-                    @endif
-                    @if (session('success'))
-                        <div class = "alert alert-success"> {{session ('success')}}</div>       
-                    @endif
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">
+                    Hồ sơ người dùng
+                    <small></small>
+                </h1>
+                @if(count($errors) > 0)
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
                 </div>
-                <!-- /.col-lg-12 -->
-                <div class="col-lg-7" style="padding-bottom:120px">
-                    <form action="{{ route('admin.profile.update') }}" method="POST">
-                        
-                        @csrf  
-                        @method('put')
-                        <div class="form-group">
-                            <label>Name</label>
-                            <input class="form-control" value="{{auth()->user()->name}}" name="name" placeholder="Please Enter Name" />
-                        </div>
-                        <div class="form-group">
-                            <label>Email</label>
-                            <input class="form-control" value="{{auth()->user()->email}}" type="email" disabled placeholder="Please Enter Email" />
-                        </div>
-                        <div class="form-group">
-                            <label>Password</label>
-                            <input class="form-control" name="password" type="password" placeholder="Please Enter Password" />
-                        </div>
-                        <div class="form-group">
-                            <label>Confirm</label>
-                            <input class="form-control" name="confirm" type="password" placeholder="Please Confirm Password" />
-                        </div>
-                        <button type="submit" class="btn btn-default">Update</button>
-                    </form>
+                @endif
+                @if(session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
                 </div>
+                @endif
             </div>
-            <!-- /.row -->
+            <!-- /.col-lg-12 -->
+            <div class="col-lg-7">
+                <form action="{{ route('admin.profile.update') }}" method="POST">
+                    @csrf
+                    @method('PUT')
+
+                    <div class="form-group">
+                        <label for="name">Tên người dùng</label>
+                        <input type="text" id="name" name="name" value="{{ auth()->user()->name }}" class="form-control" placeholder="Nhập tên người dùng">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" value="{{ auth()->user()->email }}" class="form-control" disabled placeholder="Nhập email người dùng">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Mật khẩu</label>
+                        <input type="password" id="password" name="password" class="form-control" placeholder="Nhập mật khẩu">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="confirm">Xác nhận mật khẩu</label>
+                        <input type="password" id="confirm" name="confirm" class="form-control" placeholder="Nhập mật khẩu lần nữa">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Chỉnh sửa</button>
+                </form>
+            </div>
+            <!-- /.col-lg-7 -->
         </div>
-        <!-- /.container-fluid -->
+        <!-- /.row -->
     </div>
+    <!-- /.container-fluid -->
+</div>
+<!-- /#page-wrapper -->
 
 @endsection

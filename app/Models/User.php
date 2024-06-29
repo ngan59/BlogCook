@@ -44,11 +44,6 @@ class User extends Authenticatable
         return $this->hasMany(Dish::class,'user_id','id');
     }
 
-    public function isAdmin()
-    {
-        return $this->role === 'admin';
-    }
-
     public function events()
     {
         return $this->belongsToMany(Event::class);

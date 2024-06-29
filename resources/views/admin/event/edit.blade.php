@@ -6,8 +6,8 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Event
-                        <small>Edit</small>
+                    <h1 class="page-header">Sự kiện
+                        <small>Chỉnh sửa</small>
                     </h1>
                     @if(count($errors))
                     <div class="alert alert-danger">
@@ -26,7 +26,7 @@
                         @csrf
                         @method('put')
                         <div class="form-group">
-                            <label>Event Category</label>
+                            <label>Danh mục sự kiện</label>
                             <select class="form-control" name="eventcategories_id" >
                                 @foreach ($categoriesevent as $categoryevent)
                                 {{-- kiem tra neu danh muc cua san pham nay ma bang thi minh se lay thang do   --}}
@@ -35,19 +35,21 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label>Title</label>
-                            <input class="form-control" name="title" value="{{ $events->title }}" placeholder="Please Enter Title" />
+                            <label>Tiêu đề</label>
+                            <input class="form-control" name="title" value="{{ $events->title }}" placeholder="Nhập tiêu đề sự kiện..." />
                         </div>
                         <div class="form-group">
-                            <label>Image</label>
+                            <label>Hình ảnh</label>
                             <input type="file" class="form-control" name="image" accept="image/*" />
                         </div>
                             <div class="form-group">
-                                <label>Description</label>
+                                <label>Nội dung</label>
                                 {{-- se lay tat ca du lieu --}}
                                 <textarea id="description" name="description" class="ckeditor">{!!$events->description!!}</textarea>
                             </div>
-                        <button type="submit" class="btn btn-default">Update</button>
+                            <button type="submit" class="btn btn-primary">Chỉnh sửa</button>
+                            <button type="reset" class="btn btn-default">Hủy bỏ</button>
+                            <button type="reset" class="btn btn-default"> <a href="{{ route('admin.event.index')}}">Quay lại </a></button>
                     </form>
                 </div>
             </div>

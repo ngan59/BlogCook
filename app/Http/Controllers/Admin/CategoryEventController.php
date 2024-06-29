@@ -47,7 +47,7 @@ class CategoryEventController extends Controller
             'name' => $request->name,
             'slug' => Str::slug($request->name),
         ]);
-        return redirect()->route("admin.categoryevent.index")->with("success", "Create Successfully");
+        return redirect()->route("admin.categoryevent.index")->with("success", "Thêm danh mục thành công");
     }
 
     public function edit($id)
@@ -88,13 +88,13 @@ class CategoryEventController extends Controller
             "name" => $request->name,
         ]);
 
-        return redirect()->route("admin.categoryevent.index")->with("success", "Update Successfully");
+        return redirect()->route("admin.categoryevent.index")->with("success", "Cập nhật danh mục thành công");
     }
     public function delete($id)
     {
         CategoryEvent::where("id", $id)->delete();
 
-        return redirect()->route("admin.categoryevent.index")->with("success", "Delete Successfully");
+        return redirect()->route("admin.categoryevent.index")->with("success", "Xóa danh mục thành công");
     }
 
 }

@@ -17,9 +17,9 @@ class AuthController extends Controller
     {
 
         if (Auth::attempt(["email" => $request->email, 'password' =>  $request->password])) {
-            return redirect()->route('admin.dish.index');
+            return redirect()->route('admin.dashboard.index');
         }
-        return redirect('/')->with('error', 'Failed');
+        return redirect('/')->with('error', 'Đăng nhập thất bại');
     }
     public function logout()
     {
@@ -68,6 +68,6 @@ class AuthController extends Controller
         }
 
         $user->update($data);
-        return redirect()->route('admin.profile.index')->with('success', 'Update Successfully');
+        return redirect()->route('admin.profile.index')->with('success', 'Cập nhật tài khoản thành công');
     }
 }

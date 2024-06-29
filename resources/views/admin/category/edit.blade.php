@@ -7,8 +7,8 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">Category
-                            <small>Edit</small>
+                        <h1 class="page-header">Danh mục
+                            <small>Chỉnh sửa</small>
                         </h1>
                         @if(count($errors))
                         <div class="alert alert-danger">
@@ -27,11 +27,13 @@
                         @csrf
                         @method ('put') 
                         <div class="form-group">
-                            <label>Category Name</label>
-                            <input class="form-control" name="name" value=" {{$category-> name}}" placeholder="Please Enter Category Name" />
+                            <label>Tên danh mục</label>
+                            <input class="form-control" name="name" value=" {{$category-> name}}" placeholder="Nhập danh mục..." />
                         </div>
 
-                        <button type="submit" class="btn btn-default">Update</button>
+                        <button type="submit" class="btn btn-primary">Chỉnh sửa</button>
+                        <button type="reset" class="btn btn-default">Hủy bỏ</button>
+                        <button type="reset" class="btn btn-default"> <a href="{{ route('admin.category.index')}}">Quay lại </a></button>
                     </form>
                 </div>
                 <!-- /.row -->

@@ -23,7 +23,8 @@ body,
 .dropdown-item,
 .form-control,
 p {
-    font-family: 'Poppins', serif !important;
+    font-family: 'FontAwesome', serif !important;
+
 }
 
 h1,
@@ -69,9 +70,13 @@ h5 {
 
 .first-slot {
     float: left;
-    width: 50%;
+    width: 25%;
 }
 
+/* .end-slot{
+    float:right;
+    width: 25%;
+} */
 .last-slot,
 .second-slot {
     float: left;
@@ -249,7 +254,7 @@ h5 {
 }
 
 .bg-orange {
-    background-color: #FF6347 !important;
+    background-color: #5cb85c !important;
 }
 
 .page-title .bg-orange,
@@ -327,6 +332,7 @@ a:focus {
     .first-slot {
         float: none;
         width: 100%;
+        padding: 10px;
         display: block;
     }
 }

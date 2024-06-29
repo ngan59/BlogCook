@@ -5,59 +5,82 @@
 @endsection
 <!--day view vao: dung section -->
 @section('content')
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">
+                        Công thức món ăn
+                        <small>Danh sách</small>
+                        <div class="pull-right">
+                            <span class="badge badge-info">Số công thức là {{ count($dishs) }}</span>
+                        </div>
+                    </h1>
 
-<div id="page-wrapper">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <h1 class="page-header">Dish
-                            <small>List</small>
-                        </h1>
-                        @if (session('success'))
-                        <div class = "alert alert-success"> {{session ('success')}}</div>       
+                    @if (session('success'))
+                        <div class="alert alert-success">{{ session('success') }}</div>
                     @endif
-                    </div>
-                    <!-- /.col-lg-12 -->
-                    <table class="table table-striped table-bordered table-hover" >
+                </div>
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <table class="table table-striped table-bordered table-hover">
                         <thead>
                             <tr align="center">
                                 <th>ID</th>
-                                <th>Title</th>
+                                <th>Tiêu đề</th>                                
                                 <th>Slug</th>
-                                <th>Image</th>
-                                <th>Category</th>
-                                <th>Highlight</th>
-                                <th>New Post</th>
-                                {{-- <th>Manipulation</th> --}}
-                                <th>Delete</th>
-                                <th>Edit</th>
+                                {{-- <th>Tóm tắt</th> --}}
+                                <th>Hình ảnh</th>
+                                <th>Danh mục</th>
+                                <th>Bài viết nổi bật</th>
+                                <th>Bài viết mới</th>
+                                <th>Trạng thái</th>
+                                <th>Xóa</th>
+                                <th>Sửa</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($dishs as $dish)
-                            <tr class="odd gradeX" align="center">
-                                <td>{{$dish ->id}}</td>
-                                <td>{{$dish ->title}}</td>
-                                <td>{{$dish ->slug}}</td>
-                                {{-- truyen duong dan cua no/image/dish --}}
-                                <td><img src="{{ $dish->imageUrl() }}" alt="" width="50px" height="auto"></td>
-                                <td>{{$dish ->category->name}}</td>
-                                <td>{{$dish ->highlight_post == 1 ? "x" : ""}}</td>
-                                <td>{{$dish ->new_post == 1 ? "x" : ""}}</td>
-                                {{-- <th>{{$dish ->manipulation}}</th> --}}
-                                <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="{{route ('admin.dish.delete', $dish ->id)}}"> Delete</a></td>
-                                <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="{{route ('admin.dish.edit', $dish ->id)}}">Edit</a></td>
-                            </tr>
+                            @foreach ($dishs as $key => $dish)
+                                <tr class="odd gradeX" align="center">
+                                    <td>{{ $key}}</td>
+                                    <td>{{ $dish->title }}</td>
+                                    <td>{{ $dish->slug }}</td>
+                                    <td><img src="{{ $dish->imageUrl() }}" alt="" width="50px" height="auto">
+                                    </td>
+                                    <td>{{ $dish->category->name }}</td>
+                                    <td>{{ $dish->highlight_post == 1 ? 'x' : '' }}</td>
+                                    <td>{{ $dish->new_post == 1 ? 'x' : '' }}</td>
+                                    <td>
+                                        @if ($dish->status == 1)
+                                            <p class="text text-success">
+                                                Đã duyệt
+                                            </p>
+                                        @else
+                                            <p class="text text-danger">
+                                                Chưa duyệt
+                                            </p>
+                                        @endif
+                                    </td>
+                                    <td class="center">
+                                        <i class="fa fa-trash-o fa-fw"></i>
+                                        <a href="{{ route('admin.dish.delete', $dish->id) }}">Xóa</a>
+                                    </td>
+                                    <td class="center">
+                                        <i class="fa fa-pencil fa-fw"></i>
+                                        <a href="{{ route('admin.dish.edit', $dish->id) }}">Sửa</a>
+                                    </td>
+                                </tr>
                             @endforeach
                         </tbody>
-                        
                     </table>
-             {{-- phan trang --}}
-                {!!$dishs ->links('pagination::bootstrap-4') !!}
+                    <!-- Pagination -->
+                    {!! $dishs->links('pagination::bootstrap-4') !!}
                 </div>
-                <!-- /.row -->
             </div>
-            <!-- /.container-fluid -->
+            <!-- /.row -->
         </div>
-
+        <!-- /.container-fluid -->
+    </div>
 @endsection

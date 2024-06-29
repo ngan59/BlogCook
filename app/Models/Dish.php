@@ -10,6 +10,7 @@ class Dish extends Model
     protected $table = 'dish';
     protected $fillable = [
         'title',
+        'summary',
         'description',
         'image',
         'view_count',
@@ -18,6 +19,7 @@ class Dish extends Model
         'new_post',
         'slug',
         'highlight_post',
+        'status',
     ];
 
     //mỗi bài viết thuộc về 1 user

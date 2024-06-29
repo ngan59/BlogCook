@@ -10,8 +10,8 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">Contact
-                            <small>List</small>
+                        <h1 class="page-header">Lời nhắn
+                            <small>Danh sách</small>
                         </h1>
                         @if(session('success'))
                         <div class="alert alert-success">
@@ -24,12 +24,12 @@
                         <thead>
                             <tr align="center">
                                 <th>ID</th>
-                                <th>Name</th>
-                                <th>Address</th>
-                                <th>Phone</th>
-                                <th>Subject</th>
-                                <th>Message</th>
-                                <th>Delete</th>
+                                <th>Tên người dùng</th>
+                                <th>Địa chỉ </th>
+                                <th>Số điện thoại</th>
+                                <th>Tiêu đề</th>
+                                <th>Lời nhắn</th>
+                                <th>Xóa</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -41,7 +41,7 @@
                                 <td>{{$contact->phone}}</td>
                                 <td>{{$contact->subject}}</td>
                                 <td>{{$contact->message}}</td>
-                                <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="{{route('admin.contact.delete',$contact->id)}}"> Delete</a></td>
+                                <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="{{route('admin.contact.delete',$contact->id)}}"> Xóa</a></td>
                             </tr>
                             @endforeach   
                         </tbody>

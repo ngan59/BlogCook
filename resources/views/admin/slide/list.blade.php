@@ -12,7 +12,7 @@ Admin Blog
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">Slide
-                            <small>List</small>
+                            <small>Danh sách</small>
                         </h1>
                     </div>
                     @if (session('success'))
@@ -23,12 +23,12 @@ Admin Blog
                         <thead>
                             <tr align="center">
                                 <th>ID</th>
-                                <th>Name</th>
-                                <th>Image</th>
-                                <th>Description</th>
-                                <th>SortNumber</th>
-                                <th>Delete</th>
-                                <th>Edit</th>
+                                <th>Tên slide</th>
+                                <th>Hình ảnh</th>
+                                <th>Nội dung slide</th>
+                                <th>Số thự tự slide</th>
+                                <th>Xóa</th>
+                                <th>Sửa</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -42,9 +42,9 @@ Admin Blog
                                     <img src="{{ $slide->imageUrl() }}" alt=" " width="50px" height="auto">
                                 </td>
                                 <td>{{$slide->description}}</td>
-                                <td>{{$slide->sortnumber}}</td>
-                                <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="{{route('admin.slide.delete',$slide->id)}}"> Delete</a></td>
-                                <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="{{route('admin.slide.edit',$slide->id)}}">Edit</a></td>
+                                <td>{{$slide->sortNumber}}</td>
+                                <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="{{route('admin.slide.delete',$slide->id)}}"> Xóa</a></td>
+                                <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="{{route('admin.slide.edit',$slide->id)}}">Sửa</a></td>
                             </tr>
 
                             

@@ -10,7 +10,7 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = User::paginate(1);
+        $users = User::paginate(3);
         // $users = User::all();
         return view("admin.user.list", compact("users"));
     }
@@ -46,11 +46,10 @@ class UserController extends Controller
             'password' => bcrypt($request->password),
             // Hash::make($request -> password),
             'role' => $request->role,
-            // 'follower'=> $request -> follower = '0', 
             'follower' => $request->follower, // Sử dụng toán tử null coalescing để đảm bảo giá trị mặc định là 0 nếu giá trị được truyền vào là null
             'following' => $request->following,
         ]);
-        return redirect()->route('admin.user.index')->with('success', 'Create Successfully');
+        return redirect()->route('admin.user.index')->with('success', 'Thêm người dùng thành công');
     }
 
     public function edit($id)
@@ -96,12 +95,12 @@ class UserController extends Controller
         }
 
         $user->update($data);
-        return redirect()->route('admin.user.edit', $user->id)->with('success', 'Update Successfully');
+        return redirect()->route('admin.user.edit', $user->id)->with('success', 'Cập nhật người dùng thành công');
     }
 
     public function delete($id)
     {
         User :: find($id)->delete;
-        return redirect()->route('admin.user.index', $id)->with('success',  'Deleted Successfully');
+        return redirect()->route('admin.user.index', $id)->with('success',  'Xóa người dùng thành công');
     }
 }

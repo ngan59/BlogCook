@@ -1674,3 +1674,9 @@ hr.invis3 {
     -o-border-radius: 50%;
     border-radius: 50%
 }
+
+/* Custom Styles */
+.custom-name{
+    font-size: xx-large;
+    font-weight: bold;
+}
