@@ -42,7 +42,7 @@
                         </div>
                         <div class="form-group">
                             <label>Tóm tắt</label>
-                            <textarea class="form-control" name="summary" value="{{$dish->summary}}" id="summary" placeholder="Bạn hãy nhập tóm tắt công thức" ></textarea>
+                            <textarea class="form-control" name="summary" placeholder="Bạn hãy nhập tóm tắt công thức">{{ $dish->summary }}</textarea>
                         </div>
                         <div class="form-group">
                             <label>Slug</label>

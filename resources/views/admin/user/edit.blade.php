@@ -53,7 +53,7 @@
                         </div>
                         <button type="submit" class="btn btn-default">Cập nhật</button>
                         <button type="reset" class="btn btn-default">Hủy bỏ</button>
-                        <button type="reset" class="btn btn-default"> <a href="{{ route('admin.slide.index')}}">Quay lại </a></button>
+                        <button type="reset" class="btn btn-default"> <a href="{{ route('admin.user.index')}}">Quay lại </a></button>
                        
                     </form>
                 </div>

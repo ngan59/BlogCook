@@ -23,12 +23,12 @@
                 </div>
                    
                     <!-- /.col-lg-12 -->
-                    <form action="{{ route("admin.slide.update", $slide -> id) }}" method="POST">
+                    <form action="{{ route("admin.slide.update", $slide->id) }}" enctype="multipart/form-data" method="POST">
                         @csrf
                         @method ('put') 
                         <div class="form-group">
                             <label>Tên slide</label>
-                            <input class="form-control" name="name" value ="{{$slide->name}}" placeholder="Nhập tên slide" />
+                            <input class="form-control" name="name" value ="{{ $slide->name }}" placeholder="Nhập tên slide" />
                         </div>
                         <div class="form-group">
                             <label>Hình ảnh slide</label>
@@ -36,7 +36,7 @@
                         </div>
                         <div class="form-group">
                             <label>Nội dung slide</label>
-                            <input class="form-control" name="description" value ="{{$slide->description}}"  placeholder="Nhập nội dung slide" />
+                            <textarea class="form-control" name="description" placeholder="Nhập nội dung slide">{{ $slide->description }}</textarea>
                         </div>
                         <div class="form-group">
                             <label>Số thứ tự slide</label>

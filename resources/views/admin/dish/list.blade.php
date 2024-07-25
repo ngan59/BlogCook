@@ -37,14 +37,15 @@
                                 <th>Bài viết nổi bật</th>
                                 <th>Bài viết mới</th>
                                 <th>Trạng thái</th>
+                                <th>Xem</th>
                                 <th>Xóa</th>
                                 <th>Sửa</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($dishs as $key => $dish)
+                            @foreach ($dishs as $dish)
                                 <tr class="odd gradeX" align="center">
-                                    <td>{{ $key}}</td>
+                                    <td>{{ $dish->id}}</td>
                                     <td>{{ $dish->title }}</td>
                                     <td>{{ $dish->slug }}</td>
                                     <td><img src="{{ $dish->imageUrl() }}" alt="" width="50px" height="auto">
@@ -62,6 +63,10 @@
                                                 Chưa duyệt
                                             </p>
                                         @endif
+                                    </td>
+                                    <td class="center">
+                                        <i class="fa fa-eye fa-fw"></i> 
+                                        <a href="{{ route('admin.dish.view', $dish->id) }}">Xem</a> 
                                     </td>
                                     <td class="center">
                                         <i class="fa fa-trash-o fa-fw"></i>

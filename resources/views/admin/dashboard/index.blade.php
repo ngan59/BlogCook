@@ -8,6 +8,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">Dashboard</h1>
+                        {{-- <h3>Xin chào, {{ $admin->name }}!</h3>  --}}
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>
@@ -48,7 +49,7 @@
                     </div>
                 </div>
                 {{-- <div class="row"> --}}
-                    <div class="col-lg-12">
+                    {{-- <div class="col-lg-12">
                         <h2 class="page-header">Thống kê chi tiết</h2>
                         <div class="panel panel-default">
                             <div class="panel-heading">
@@ -82,7 +83,7 @@
                             <!-- /.panel-body -->
                         </div>
                         <!-- /.panel -->
-                    </div>
+                    </div> --}}
                     <!-- /.col-lg-12 -->
                 </div>
                 <!-- /.row -->

@@ -11,13 +11,14 @@ class Event extends Model
     protected $fillable = [
         'title',
         'image',
+        'slug',
         'description',
         'eventcategories_id',
         'user_id',
     ];
-    public function user()
+    public function users()
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(User::class, 'event_user');
     }
     public function categoryevent()
     {

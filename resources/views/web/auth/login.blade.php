@@ -3,8 +3,8 @@
 @section('content')
 <section class="section wb mt-5">
     <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
                 <div class="page-wrapper">
                     <div class="row">
                         @if(session('error'))
@@ -20,15 +20,19 @@
                         <div class="col-lg-12">
                             <form class="form-wrapper" action="{{ route('web.auth.login') }}" method="post">
                                 @csrf
-                                <input type="text" name="email" class="form-control" placeholder="Email address" value="{{ old('email') }}">
+                                <input type="text" name="email" class="form-control" placeholder="Địa chỉ email" value="{{ old('email') }}">
                                 @error('email')
                                     <small class="text-danger">{{ $message }}</small>
                                 @enderror
-                                <input type="password" name="password" class="form-control" placeholder="Password">
+                                <input type="password" name="password" class="form-control" placeholder="Mật khẩu">
                                 @error('password')
                                     <small class="text-danger">{{ $message }}</small>
                                 @enderror
-                                <button type="submit" class="btn btn-primary">Login</button>
+                                <div class="form-group row">
+                                    <div class="col-sm-12 text-center">
+                                      <button type="submit" class="btn btn-primary">Đăng nhập</button>
+                                    </div>
+                                  </div>
                             </form>
                         </div>
                     </div>

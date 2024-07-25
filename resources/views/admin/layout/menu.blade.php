@@ -53,7 +53,7 @@
         <!-- /.nav-second-level -->
     </li>
     <li>
-        <a href="#"><i class="fa fa-sliders fa-fw"></i> Slide<span class="fa arrow"></span></a>
+        <a href="#"><i class="fa fa-sliders fa-fw"></i>Quản lý Slide<span class="fa arrow"></span></a>
         <ul class="nav nav-second-level">
             <li>
                 <a href="{{ route('admin.slide.index') }}">Danh sách Slide</a>
@@ -63,25 +63,38 @@
             </li>
         </ul>
         <!-- /.nav-second-level -->
-        {{-- </li>
+        </li>
                         <li>
-                        <a href="#"><i class="fa fa-comments fa-fw"></i> Comment<span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-comments fa-fw"></i> Quản lý bình luận<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="#">List Comment</a>
+                                    <a href="{{ route('admin.comment.index') }}">Danh sách bình luận</a>
                                 </li>
-                                <li>
-                                    <a href="#">Add Comment</a>
-                                </li>
-                            </ul> --}}
+                                {{-- <li>
+                                    <a href="#"></a>
+                                </li> --}}
+                            </ul>
         <!-- /.nav-second-level -->
 
     </li>
     <li>
-        <a href="#"><i class="fa fa-bug fa-fw"></i> Báo cáo<span class="fa arrow"></span></a>
+        <a href="#"><i class="fa fa-tags fa-fw"></i> Quản lý danh mục báo cáo<span class="fa arrow"></span></a>
+            <ul class="nav nav-second-level">
+                <li>
+                    <a href="{{ route('admin.categoryreport.index') }}">Danh sách danh mục báo cáo</a>
+                </li>
+                <li>
+                    <a href="{{ route('admin.categoryreport.create') }}">Thêm danh mục báo cáo</a>
+                </li>
+            </ul>
+<!-- /.nav-second-level -->
+
+</li>
+    <li>
+        <a href="#"><i class="fa fa-bug fa-fw"></i> Quản lý báo cáo<span class="fa arrow"></span></a>
         <ul class="nav nav-second-level">
             <li>
-                <a href="#">Danh sách báo cáo</a>
+                <a href="{{ route('admin.report.index') }}">Danh sách báo cáo</a>
             </li>
             {{-- <li>
                 <a href="#">Thêm báo cáo</a>
@@ -90,7 +103,7 @@
         <!-- /.nav-second-level -->
     </li>
     <li>
-        <a href="#"><i class="fa fa-tag fa-fw"></i> Danh mục sự kiện<span class="fa arrow"></span></a>
+        <a href="#"><i class="fa fa-gamepad fa-fw"></i> Danh mục sự kiện<span class="fa arrow"></span></a>
         <ul class="nav nav-second-level">
             <li>
                 <a href="{{ route('admin.categoryevent.index') }}">Danh sách danh mục sự kiện</a>
@@ -102,7 +115,7 @@
         <!-- /.nav-second-level -->
     </li>
     <li>
-        <a href="#"><i class="fa fa-gamepad fa-fw"></i> Sự kiện<span class="fa arrow"></span></a>
+        <a href="#"><i class="fa fa-gift fa-fw"></i> Sự kiện<span class="fa arrow"></span></a>
         <ul class="nav nav-second-level">
             <li>
                 <a href="{{ route('admin.event.index') }}">Danh sách sự kiện</a>
@@ -110,6 +123,16 @@
             <li>
                 <a href="{{ route('admin.event.create') }}">Thêm sự kiện</a>
             </li>
+        </ul>
+        <!-- /.nav-second-level -->
+    </li>
+    <li>
+        <a href="#"><i class="fa fa-user-secret fa-fw"></i> Người tham gia sự kiện<span class="fa arrow"></span></a>
+        <ul class="nav nav-second-level">
+            <li>
+                <a href="{{ route('admin.eventparticipants.index') }}">Danh sách người tham gia</a>
+            </li>
+
         </ul>
         <!-- /.nav-second-level -->
     </li>

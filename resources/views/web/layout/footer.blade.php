@@ -19,7 +19,7 @@
                         <div class="newsletter-widget text-left">
                             <form class="form-inline">
                                 <input type="text" class="form-control" placeholder="Enter your email address">
-                                <button type="submit" class="btn btn-primary">SUBMIT</button>
+                                <button type="submit"  class="btn btn-primary">SUBMIT</button>
                             </form>
                         </div><!-- end newsletter -->
                     </div><!-- end footer-text -->

@@ -31,7 +31,7 @@
                     </div>
                     <div class="form-group">
                         <label>Nội dung</label>
-                        <input class="form-control" name="description" placeholder="Nhập nội dung slide" />
+                        <textarea class="form-control" name="description" placeholder="Nhập nội dung slide" ></textarea>
                     </div>
                     <div class="form-group">
                         <label>Số thứ tự</label>

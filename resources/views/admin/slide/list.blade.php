@@ -19,14 +19,15 @@ Admin Blog
                         <div class = "alert alert-success"> {{session ('success')}}</div>       
                     @endif
                     <!-- /.col-lg-12 -->
-                    <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                    <table class="table table-striped table-bordered table-hover" >
                         <thead>
                             <tr align="center">
                                 <th>ID</th>
                                 <th>Tên slide</th>
                                 <th>Hình ảnh</th>
-                                <th>Nội dung slide</th>
+                                {{-- <th>Nội dung slide</th> --}}
                                 <th>Số thự tự slide</th>
+                                <th>Xem</th>
                                 <th>Xóa</th>
                                 <th>Sửa</th>
                             </tr>
@@ -41,8 +42,12 @@ Admin Blog
                                 <td>
                                     <img src="{{ $slide->imageUrl() }}" alt=" " width="50px" height="auto">
                                 </td>
-                                <td>{{$slide->description}}</td>
+                                {{-- <td>{{$slide->description}}</td> --}}
                                 <td>{{$slide->sortNumber}}</td>
+                                <td class="center">
+                                    <i class="fa fa-eye fa-fw"></i> 
+                                    <a href="{{ route('admin.slide.view', $slide->id) }}">Xem</a> 
+                                </td>
                                 <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="{{route('admin.slide.delete',$slide->id)}}"> Xóa</a></td>
                                 <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="{{route('admin.slide.edit',$slide->id)}}">Sửa</a></td>
                             </tr>

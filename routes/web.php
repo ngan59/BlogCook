@@ -3,14 +3,24 @@
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CategoryEventController;
+use App\Http\Controllers\Admin\CategoryReportController;
+use App\Http\Controllers\Admin\CommentController;
 use App\Http\Controllers\Admin\DishController;
 use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\DashBoard;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\EventController;
+use App\Http\Controllers\Admin\EventParticipantController;
+use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\SlideController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\User\EventsController;
+use App\Http\Controllers\User\ManageController;
+use App\Http\Controllers\User\PostController;
+use App\Http\Controllers\User\RecipeController;
 use App\Http\Controllers\User\LoginController;
+use App\Http\Controllers\User\RegisterController;
+use App\Http\Controllers\User\ReportsController;
 use App\Http\Controllers\User\WebController;
 use Illuminate\Support\Facades\Route;
 
@@ -37,10 +47,10 @@ Route::group(['prefix' => 'admin', 'middleware' => 'checkadminLogin'], function 
     Route::put('profile', [AuthController::class, 'updateProfile'])
         ->name('admin.profile.update');
 
-    Route::prefix('dashboard')->group(function(){
-        Route::get('/',[DashboardController::class,'index'])
+    Route::prefix('dashboard')->group(function () {
+        Route::get('/', [DashboardController::class, 'index'])
             ->name('admin.dashboard.index');
-    }); 
+    });
 
     Route::prefix('category')->group(function () {
         Route::get('/', [CategoryController::class, 'index'])
@@ -65,7 +75,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'checkadminLogin'], function 
     Route::prefix('dish')->group(function () {
         Route::get('/', [DishController::class, 'index'])
             ->name('admin.dish.index');
-
+        Route::get('view/{id}', [DishController::class, 'view'])
+            ->name('admin.dish.view');
         Route::get('create', [DishController::class, 'create'])
             ->name('admin.dish.create');
         /**cập nhật vào database */
@@ -113,6 +124,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'checkadminLogin'], function 
     Route::prefix('event')->group(function () {
         Route::get('/', [EventController::class, 'index'])
             ->name('admin.event.index');
+        Route::get('view/{id}', [EventController::class, 'view'])
+            ->name('admin.event.view');
         Route::get('create', [EventController::class, 'create'])
             ->name('admin.event.create');
         /**cập nhật vào database */
@@ -152,7 +165,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'checkadminLogin'], function 
     Route::prefix('slide')->group(function () {
         Route::get('/', [SlideController::class, 'index'])
             ->name('admin.slide.index');
-
+        Route::get('view/{id}', [SlideController::class, 'view'])
+            ->name('admin.slide.view');
         Route::get('create', [SlideController::class, 'create'])
             ->name('admin.slide.create');
         /**cập nhật vào database */
@@ -168,16 +182,86 @@ Route::group(['prefix' => 'admin', 'middleware' => 'checkadminLogin'], function 
         Route::get('delete/{id}', [SlideController::class, 'delete'])
             ->name('admin.slide.delete');
     });
-        
-    // Route::post('/ckeditor/image-upload', 'Admin\DishController@uploadCkeditorImage')
-    // ->name('ckeditor.image-upload');
 
-}); 
+    Route::prefix('comment')->group(function () {
+        Route::get('/', [CommentController::class, 'index'])
+            ->name('admin.comment.index');
+        Route::get('view/{id}', [CommentController::class, 'view'])
+            ->name('admin.comment.view');
+        Route::get('create', [CommentController::class, 'create'])
+            ->name('admin.comment.create');
+        /**cập nhật vào database */
+        Route::post('store', [CommentController::class, 'store'])
+            ->name('admin.comment.store');
+        /**lấy danh mục ra để chỉnh sửa */
+        Route::get('edit/{id}', [CommentController::class, 'edit'])
+            ->name('admin.comment.edit');
+        /**cập nhật thông tin đã chỉnh sửa */
+        Route::put('update/{id}', [CommentController::class, 'update'])
+            ->name('admin.comment.update');
+        Route::get('delete/{id}', [CommentController::class, 'delete'])
+            ->name('admin.comment.delete');
+    });
+    
+
+    Route::prefix('categoryreport')->group(function () {
+        Route::get('/', [CategoryReportController::class, 'index'])
+            ->name('admin.categoryreport.index');
+        Route::get('view/{id}', [CategoryReportController::class, 'view'])
+            ->name('admin.categoryreport.view');
+        Route::get('/report/{id}',[ CategoryReportController::class,'show'])
+        ->name('admin.categoryreport.show');
+        Route::get('create', [CategoryReportController::class, 'create'])
+            ->name('admin.categoryreport.create');
+        /**cập nhật vào database */
+        Route::post('store', [CategoryReportController::class, 'store'])
+            ->name('admin.categoryreport.store');
+        /**lấy danh mục ra để chỉnh sửa */
+        Route::get('edit/{id}', [CategoryReportController::class, 'edit'])
+            ->name('admin.categoryreport.edit');
+        /**cập nhật thông tin đã chỉnh sửa */
+        Route::put('update/{id}', [CategoryReportController::class, 'update'])
+            ->name('admin.categoryreport.update');
+        Route::get('delete/{id}', [CategoryReportController::class, 'delete'])
+            ->name('admin.categoryreport.delete');
+    });
+
+    Route::prefix('report')->group(function () {
+        Route::get('/', [ReportController::class, 'index'])
+            ->name('admin.report.index');
+        Route::get('view/{id}', [ReportController::class, 'view'])
+            ->name('admin.report.view');
+
+        Route::get('/report/{id}',[ ReportController::class,'show'])
+        ->name('admin.reports.show');
+
+        Route::get('create', [ReportController::class, 'create'])
+            ->name('admin.report.create');
+        /**cập nhật vào database */
+        Route::post('store', [ReportController::class, 'store'])
+            ->name('admin.report.store');
+        /**lấy danh mục ra để chỉnh sửa */
+        Route::get('edit/{id}', [ReportController::class, 'edit'])
+            ->name('admin.report.edit');
+        /**cập nhật thông tin đã chỉnh sửa */
+        Route::put('update/{id}', [ReportController::class, 'update'])
+            ->name('admin.report.update');
+        Route::get('delete/{id}', [ReportController::class, 'delete'])
+            ->name('admin.report.delete');
+    });
+
+    Route::prefix('eventparticipants')->group(function () {
+        Route::get('/', [EventParticipantController::class, 'index'])
+        ->name('admin.eventparticipants.index');
+    Route::get('event-participants/{eventId}', [EventParticipantController::class, 'view'])
+    ->name('admin.eventparticipants.view');
+    });
+
+});
 
 // Home
 Route::get('/', [WebController::class, 'home'])
-->name('web.home');
-
+    ->name('web.home');
 /**lấy hết tất cả các danh mục */
 Route::get('category', [WebController::class, 'category']);
 /**sẽ lấy những bài viết ở trong danh mục bài viết nào */
@@ -197,10 +281,50 @@ Route::get('contact', [WebController::class, 'contact'])
 Route::post('contact', [WebController::class, 'sendContact'])
     ->name('web.contact.store');
 
+/**sự kiện*/
+Route::get('categoryevent', [EventsController ::class, 'categoryevent'])
+    ->name('web.categoryevent');
+Route::get('categoryevent/{slug}', [EventsController ::class, 'categoryeventSlug'])
+    ->name('web.categoryevent.slug');
+Route::post('event/register', [EventsController ::class, 'sendEvent'])
+    ->name('web.event.register');
+Route::get('event/{slug}', [EventsController ::class, 'event'])
+    ->name('web.event');
 
-Route::get('login',[LoginController::class,'formLogin']);
+Route::get('login', [LoginController::class, 'formLogin']);
+Route::get('register', [RegisterController::class, 'formRegister']);
+Route::post('register', [RegisterController::class, 'register'])
+    ->name('web.auth.register');
 
-Route::post('login',[LoginController::class,'login'])
-    ->name ('web.auth.login');
+Route::post('login', [LoginController::class, 'login'])
+    ->name('web.auth.login');
+Route::get('logout', [LoginController::class, 'logout'])
+    ->name('web.auth.logout');
 
-Route::get('logout', [LoginController::class, 'logout']);
+Route::get('profile', [LoginController::class, 'profile'])
+    ->name('web.profile.index');
+Route::put('profile', [LoginController::class, 'updateProfile'])
+    ->name('web.profile.update');
+
+/**tìm kiếm*/
+Route::get('search', [WebController::class, 'search'])
+    ->name('web.search');    
+/**user đăng bài*/
+    Route::get('/recipes/create', [RecipeController::class, 'create'])
+    ->name('recipes.create');
+    Route::post('/recipes', [RecipeController::class, 'store'])
+    ->name('recipes.store');  
+
+/**user quản lý bài viết đã đăng*/ 
+    Route::get('/manage', [ManageController::class, 'index'])
+    ->name('manage.index');
+    Route::get('manage/{slug}', [ManageController::class, 'view'])
+    ->name('manage.view');
+    Route::get('delete/{id}', [ManageController::class, 'delete'])
+    ->name('manage.delete');
+
+/**báo cáo*/ 
+Route::post('/report',[ReportsController::class,'store'])
+->name('report.store');
+Route::get('/dish/{id}/report', [WebController::class, 'showReportForm'])
+->name('dish.report');

@@ -16,7 +16,7 @@
                         <a class="nav-link" href="/category">Category</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/web/tech-category-02.html">Event</a>
+                        <a class="nav-link" href="/categoryevent">Event</a>
                     </li>
                     {{-- <li class="nav-item">
                         <a class="nav-link" href="/web/tech-category-03.html">Reviews</a>
@@ -65,16 +65,16 @@
                 @if (Illuminate\Support\Facades\Auth::check())
                 {{-- Dropdown menu for authenticated users --}}
                 <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle custom-dropdown-toggle" type="button"
+                    <button class="btn btn-secondary dropdown-toggle custom-dropdown-toggle" type="button"-
                         id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fa fa-user"></i> 
                         {{ Auth::user()->name }}
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="#">Profile</a>
-                        <a class="dropdown-item" href="#">Settings</a>
+                        <a class="dropdown-item" href="{{route('web.profile.index')}}">Thông tin người dùng</a>
+                        <a class="dropdown-item" href="{{ route('manage.index') }}">Quản lý bài viết</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Đăng xuất</a>
+                        <a class="dropdown-item" href="{{route('web.auth.logout')}}">Đăng xuất</a>
                     </div>
                 </div>
             @else
@@ -85,14 +85,14 @@
                         <i class="fa fa-user"></i> <span class="bold">Đăng nhập</span> / <span class="bold">Đăng kí</span>
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item bold" href="#">Đăng nhập</a>
-                        <a class="dropdown-item bold" href="#">Đăng kí</a>
+                        <a class="dropdown-item bold" href="/login">Đăng nhập</a>
+                        <a class="dropdown-item bold" href="/register">Đăng kí</a>
                     </div>
                 </div>
                 @endif
 
                 @if (Illuminate\Support\Facades\Auth::check())
-                <a class="btn custom-btn-primary ml-2" href="#">Đăng Bài Viết</a>
+                <a class="btn custom-btn-primary ml-2" href="{{ route('recipes.create') }}">Đăng Bài Viết</a>
                 @endif
             </div>
         </nav>

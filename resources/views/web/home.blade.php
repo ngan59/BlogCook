@@ -2,16 +2,16 @@
 
 @section('content')
     <!-- Carousel/Slider Section -->
-    <!-- Carousel/Slider Section -->
-    <!-- Carousel/Slider Section -->
     <section class="section first-section">
         <div class="carousel-container">
             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                 <ol class="carousel-indicators">
+
                     @foreach ($slides as $key => $slide)
                         <li data-target="#carouselExampleIndicators" data-slide-to="{{ $key }}"
                             @if ($key == 0) class="active @endif"></li>
                     @endforeach
+
                 </ol>
                 <div class="carousel-inner">
                     @foreach ($slides as $key => $slide)
@@ -19,7 +19,6 @@
                             <img src="{{ asset('/image/slide/' . $slide->image) }}" class="d-block w-100 custom-image"
                                 alt="Slide Image">
                             <div class="carousel-caption d-none d-md-block">
-
                                 <p class="custom-name">{{ $slide->name }}</p>
                                 <h5 class="custom-description">{{ $slide->description }}</h5>
                             </div>
@@ -37,8 +36,6 @@
                 </a>
             </div>
         </div>
-
-
     </section>
 
 
@@ -89,7 +86,8 @@
                 <div class="col-lg-9">
                     <div class="page-wrapper">
                         <div class="blog-top clearfix">
-                            <h4 class="pull-left">Công thức gần đây <a href="#"><i class="fa fa-rss"></i></a></h4>
+                            <h4 class="pull-left">Công thức gần đây <a href="#"><i
+                                        class="fa fa-cutlery food fa-spin"></i></a></h4>
                         </div><!-- end blog-top -->
                         @foreach ($new as $dish)
                             <div class="blog-list clearfix">
@@ -107,7 +105,10 @@
                                         <h4 style="margin-left: 0px !important; padding: 12px 0px !important;"><a
                                                 href="{{ route('web.dish', $dish->slug) }}"
                                                 title="">{{ $dish->title }}</a></h4>
-                                        <p>{{ $dish->summary }}</p>
+                                        <p
+                                            style="  display: -webkit-box; -webkit-line-clamp: 3;  -webkit-box-orient: vertical; overflow: hidden;">
+                                            {{ $dish->summary }}</p>
+
                                         <small class="firstsmall"><a class="bg-orange"
                                                 href="{{ route('web.category', $dish->category->slug) }}"
                                                 title="">{{ $dish->category->name }}</a></small>
@@ -122,36 +123,22 @@
                         @endforeach
                     </div><!-- end page-wrapper -->
 
-                                   <hr class="invis">
-
-                                   {{-- <div class="row">
-                                       <div class="col-md-12">
-                                           <nav aria-label="Page navigation">
-                                               <ul class="pagination justify-content-start">
-                                                   <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                                   <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                                   <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                                   <li class="page-item">
-                                                       <a class="page-link" href="#">Next</a>
-                                                   </li>
-                                               </ul>
-                                           </nav>
-                                       </div><!-- end col -->
-                                   </div><!-- end row --> --}}
+                    <hr class="invis">
+                    {{ $new->links('pagination::bootstrap-4') }}
                 </div><!-- end col -->
 
-              <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
-                    <div class="sidebar"> 
+                <div class="col-lg-3">
+                    <div class="sidebar">
                         <div class="widget">
-                            <div class="input-group custom-search-form">
-                                <input type="text" class="form-control" placeholder="Tìm kiếm...">
+                            <form class="input-group custom-search-form" method="get" action="{{ route('web.search') }}">
+                                <input type="text" class="form-control" name="tukhoa" placeholder="Tìm kiếm...">
                                 <span class="input-group-btn">
-                                    <button class="btn btn-default" style ="border-radius: 0 5px 5px 0" type="button">
+                                    <button type="submit" class="btn btn-default" style="border-radius: 0 5px 5px 0">
                                         <i class="fa fa-search"></i>
                                     </button>
                                 </span>
-                            </div>
-                         </div><!-- end widget -->
+                            </form>
+                        </div><!-- end widget -->
 
                         <div class="widget">
                             <h2 class="widget-title">Các bài viết nổi bật</h2>
@@ -167,10 +154,10 @@
                                             </a>
                                         </div><!-- end media -->
                                         <div class="blog-meta">
-                                            <h4><a href="{{ route('web.dish', $item->slug) }}" title="">{{ $item->title }}</a></h4>
+                                            <h4><a href="{{ route('web.dish', $item->slug) }}"
+                                                    title="">{{ $item->title }}</a></h4>
                                         </div><!-- end meta -->
                                     </div><!-- end blog-box -->
-    
                                     <hr class="invis">
                                 @endforeach
                             </div><!-- end videos -->
@@ -178,5 +165,11 @@
 
                     </div><!-- end row -->
                 </div><!-- end container -->
+                <style>
+                    .food {
+                        color: #76a4bf;
+                        font-size: 24px;
+                    }
+                </style>
     </section>
 @endsection

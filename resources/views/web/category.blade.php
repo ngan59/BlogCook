@@ -29,12 +29,12 @@
                     <div class="page-wrapper">
                         <div class="blog-grid-system">
                             <div class="row">
-                                @foreach ($dishs as $dish)
+                                @forelse ($dishs as $dish)
                                     <div class="col-md-6">
                                         <div class="blog-box">
                                             <div class="post-media">
                                                 <a href="{{route('web.dish', $dish->slug) }}" title="">
-                                                    <img src="{{ $dish->imageUrl() }}" alt="" class="img-fluid">
+                                                    <img src="{{ $dish->imageUrl() }}" alt=""  class="img-fluid">
                                                     <div class="hovereffect">
                                                     </div><!-- end hover -->
                                                 </a>
@@ -45,11 +45,16 @@
                                                     {{-- <p>{!! $dish->description !!}</p> --}}
                                                     <small>{{ \Carbon\Carbon::parse($dish->created_at)->format('d-m-Y') }}</small>
                                                     <small>{{ $dish->user->name }}</small>
-                                                    <small><i class="fa fa-eye"></i> {{ $dish->view_counts }}</small>
+                                                    <small><i class="fa fa-eye"></i> {{ $dish->view_count }}</small>
                                             </div><!-- end meta -->
                                         </div><!-- end blog-box -->
                                     </div><!-- end col -->
-                                @endforeach
+                                    @empty
+                                    <div class="col-md-12 text-center">
+                                        <p>Hiện tại không có bài viết nào trong danh mục này.</p>
+                                    </div><!-- end col -->
+                                @endforelse
+                                    
                             </div><!-- end row -->
                         </div><!-- end blog-grid-system -->
                     </div><!-- end page-wrapper -->
@@ -62,7 +67,9 @@
                         </div><!-- end col -->
                     </div><!-- end row -->
                 </div><!-- end col -->
+
             </div><!-- end row -->
         </div><!-- end container -->
     </section>
+    {{-- style="width:100%; height:200px; object-fit: cover;  display: block;" --}}
 @endsection

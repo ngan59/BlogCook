@@ -17,6 +17,11 @@ class DishController extends Controller
         // $dishs = Dish::where('status', 1)->paginate(10); 
         return view("admin.dish.list", compact("dishs"));
     }
+    public function view($id)
+    {
+        $dish = Dish::findOrFail($id);
+        return view('admin.dish.view', compact('dish'));
+    }
     public function create()
     {
         $categories = Category::all();
@@ -103,11 +108,13 @@ class DishController extends Controller
             [
                 'id_category' => 'required',
                 'title' => 'required',
+                'summary' => 'required',
                 'description' => 'required',
 
             ],
             [
                 'tittle.required' => 'Bạn chưa nhập tên thể loại',
+                'summary.required' => 'Bạn chưa nhập tóm tắt',
                 'description.required' => 'Bạn chưa nhập nội dung',
                 'id_category.required' => 'Bạn chưa nhập danh mục',
             ]
@@ -157,34 +164,4 @@ class DishController extends Controller
         Dish::find($id)->delete();
         return redirect()->route("admin.dish.index")->with("success", "Xóa công thức thành công");
     }
-    // public function uploadCkeditorImage(Request $request)
-    // {
-    //     $validator = $request->validate([
-    //         'upload' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-    //     ]);
-
-    //     if ($request->hasFile('upload')) {
-    //         $image = $request->file('upload');
-    //         $name = Str::random(5) . '_' . $image->getClientOriginalName();
-    //         $destinationPath = public_path('/image/dish');
-    //         $image->move($destinationPath, $name);
-
-    //         // Trả về đường dẫn của file để CKEditor hiển thị
-    //         $url = asset('image/dish/' . $name);
-    //         $return = [
-    //             'fileName' => $name,
-    //             'uploaded' => 1,
-    //             'url' => $url,
-    //         ];
-    //     } else {
-    //         $return = [
-    //             'uploaded' => 0,
-    //             'error' => [
-    //                 'message' => 'Upload không thành công',
-    //             ],
-    //         ];
-    //     }
-
-    //     return response()->json($return);
-    // }
 }

@@ -755,12 +755,22 @@ pre code {
 }
 
 .container {
+
+  /* width: 100%;
+  position: relative;
+  margin-left: 65px;
+  margin-right: auto;
+  padding-right: 15px;
+  padding-left: 15px; */
+
   position: relative;
   margin-left: auto;
   margin-right: auto;
   padding-right: 15px;
   padding-left: 15px;
+  
 }
+
 
 @media (min-width: 576px) {
   .container {

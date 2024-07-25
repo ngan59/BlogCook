@@ -35,7 +35,7 @@
                         </div>
                         <div class="form-group">
                             <label>Xác nhận mật khẩu</label>
-                            <input class="form-control" name="confirm" type="password" placeholder="Please Confirm Password" />
+                            <input class="form-control" name="confirm" type="password" placeholder="Nhập lại mật khẩu" />
                         </div>
                         <div class="form-group">
                             <label>Vai trò</label>

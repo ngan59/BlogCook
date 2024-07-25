@@ -14,6 +14,11 @@ class SlideController extends Controller
         $slides = Slide::orderBy('sortNumber')->get();
         return view("admin.slide.list", compact("slides"));
     }
+    public function view($id)
+    {
+        $slide = Slide::findOrFail($id);
+        return view('admin.slide.view', compact('slide'));
+    }
 
     public function create()
     {
@@ -33,9 +38,6 @@ class SlideController extends Controller
             [
                 'name.required' => 'Bạn chưa nhập tên slide',
                 'image.required' => 'Bạn chưa tải hình ảnh',
-                'image.image' => 'Tập tin phải là hình ảnh',
-                'image.mimes' => 'Hình ảnh phải có định dạng jpg, png, jpeg',
-                'image.max' => 'Kích thước hình ảnh không được vượt quá 2MB',
                 'description.required' => 'Bạn chưa nhập tên nội dung',
                 'sortNumber.required' => 'Bạn chưa nhập số thứ tự',
                 'sortNumber.integer' => 'Số thứ tự phải là một số nguyên',
@@ -63,11 +65,7 @@ class SlideController extends Controller
                     $image = Str::random(5) . "_" . $name_file;
                 }
                 $file->move('image/slide', $image);
-            } else {
-                return redirect()->back()->withInput()->with("error", "Định dạng hình ảnh không hợp lệ");
             }
-        } else {
-            return redirect()->back()->withInput()->with("error", "Không tải được hình ảnh");
         }
 
         Slide::create([
@@ -96,9 +94,7 @@ class SlideController extends Controller
             ],
             [
                 'name.required' => 'Bạn chưa nhập tên slide',
-                'image.image' => 'Tập tin phải là hình ảnh',
-                'image.mimes' => 'Hình ảnh phải có định dạng jpg, png, jpeg',
-                'image.max' => 'Kích thước hình ảnh không được vượt quá 2MB',
+                
                 'description.required' => 'Bạn chưa nhập tên nội dung',
                 'sortNumber.required' => 'Bạn chưa nhập số thứ tự',
                 'sortNumber.integer' => 'Số thứ tự phải là một số nguyên',
@@ -110,22 +106,26 @@ class SlideController extends Controller
         if ($request->hasFile('image')) {
             $file = $request->file('image');
             $name_file = $file->getClientOriginalName();
+
             $extension = pathinfo($name_file, PATHINFO_EXTENSION);
+
 
             if (
                 strnatcasecmp($extension, 'jpg') == 0
                 || strnatcasecmp($extension, 'png') == 0
-                || strnatcasecmp($extension, 'jepg') == 0
+                || strnatcasecmp($extension, 'jpeg') == 0
             ) {
+
+
                 $image = Str::random(5) . "_" . $name_file;
+
                 while (file_exists("image/slide" . $image)) {
                     $image = Str::random(5) . "_" . $name_file;
                 }
                 $file->move('image/slide', $image);
-            } else {
-                return redirect()->back()->withInput()->with("error", "Định dạng hình ảnh không hợp lệ");
             }
         }
+
 
         $slide->update([
             'name' => $request->name,

@@ -33,11 +33,11 @@
                         </div>
                         <div class="form-group">
                             <label>Tiêu đề</label>
-                            <input class="form-control" name="title" id="title" onkeyup="ChangeToSlug()" placeholder="Bạn hãy nhập tiêu đề công thức" />
+                            <input class="form-control" name="title" id="title" placeholder="Bạn hãy nhập tiêu đề công thức"  onkeyup="ChangeToSlug()" />
                         </div>
                         <div class="form-group">
                             <label>Tóm tắt</label>
-                            <textarea class="form-control" name="summary" id="summary" placeholder="Bạn hãy nhập tóm tắt công thức"></textarea>
+                            <textarea class="form-control" name="summary" placeholder="Bạn hãy nhập tóm tắt công thức"></textarea>
                         </div>
                         <div class="form-group">
                             <label>Slug</label>
@@ -67,13 +67,6 @@
                             <div class="form-group">
                                 <label>Nội dung</label>
                                 <textarea id="editor1" name="description" class="ckeditor"></textarea>
-                                {{-- <script>
-                                    CKEDITOR.replace('editor1', {
-                                        filebrowserUploadUrl: "{{ route('ckeditor.image-upload') }}",
-                                        filebrowserUploadMethod: 'form',
-                                        height: 300 // chiều cao của editor
-                                    });
-                                </script> --}}
                             </div>
                         <button type="submit" class="btn btn-default">Thêm công thức</button>
                         <button type="reset" class="btn btn-default"><a href="{{route('admin.dish.index')}}">Hủy bỏ</button>
