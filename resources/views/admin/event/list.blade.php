@@ -26,6 +26,7 @@ Event
                                 <th>Slug</th>
                                 <th>Hình ảnh</th>
                                 <th>Danh mục sự kiện</th>
+                                <th>Ngày bắt đầu</th> 
                                 <th>Xem</th>
                                 <th>Xóa</th>
                                 <th>Sửa</th>
@@ -41,6 +42,7 @@ Event
                                     <img src="{{ $event->imageUrl() }}" alt=" " width="50px" height="auto">
                                 </td>
                                 <td>{{$event ->categoryevent->name}}</td>
+                                <td>{{ \Carbon\Carbon::parse($event->start_date)->format('d-m-Y') }}</td>
                                 {{-- <td>{!!$event->description !!}</td></td> --}}
                                 <td class="center">
                                     <i class="fa fa-eye fa-fw"></i> 

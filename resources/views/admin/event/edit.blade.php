@@ -38,6 +38,10 @@
                             <label>Tiêu đề</label>
                             <input class="form-control" name="title" id="title" value="{{ $events->title }}" placeholder="Nhập tiêu đề sự kiện..."  onkeyup="ChangeToSlug()" />
                         </div>
+                        {{-- <div class="form-group">
+                            <label for="start_date">Ngày bắt đầu</label>
+                            <input type="date" class="form-control" name="start_date" value="{{ $events->start_date ? $events->start_date->format('Y-m-d') : '' }}" required>
+                        </div> --}}
                         <div class="form-group">
                             <label>Slug</label>
                             <input class="form-control" name="slug" id="slug" placeholder=" " readonly />

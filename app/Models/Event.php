@@ -15,6 +15,7 @@ class Event extends Model
         'description',
         'eventcategories_id',
         'user_id',
+        'start_date',
     ];
     public function users()
     {

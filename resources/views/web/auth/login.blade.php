@@ -29,6 +29,9 @@
                                     <small class="text-danger">{{ $message }}</small>
                                 @enderror
                                 <div class="form-group row">
+                                    <div class="col-sm-6 text-left">
+                                        <a href="{{ route('web.auth.forgot-password') }}" class="text-primary">Quên mật khẩu?</a>
+                                    </div>
                                     <div class="col-sm-12 text-center">
                                       <button type="submit" class="btn btn-primary">Đăng nhập</button>
                                     </div>

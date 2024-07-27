@@ -22,7 +22,7 @@
                         <h3>{{ $event->title }}</h3>
 
                         <div class="blog-meta big-meta">
-                            <small>{{ \Carbon\Carbon::parse($event->created_at)->format('d-m-Y') }}</small>
+                            <small>{{ \Carbon\Carbon::parse($event->start_date)->format('d-m-Y') }}</small>
                             {{-- <small>{{ $event->user->name }}</small> --}}
                             <small><i class="fa fa-eye"></i> {{ $event->view_count }}</small>
                         </div><!-- end meta -->

@@ -301,6 +301,16 @@ Route::post('login', [LoginController::class, 'login'])
 Route::get('logout', [LoginController::class, 'logout'])
     ->name('web.auth.logout');
 
+    Route::get('forgot-password', [LoginController::class, 'forgotPassword'])
+    ->name('web.auth.forgot-password');
+Route::post('send-mail-forgot-password', [LoginController::class, 'sendMail'])
+    ->name('send-mail');
+
+Route::get('reset-password', [LoginController::class, 'formReset'])
+->name('form-reset');
+Route::post('reset-password', [LoginController::class, 'resetPassword'])
+->name('reset-password');
+
 Route::get('profile', [LoginController::class, 'profile'])
     ->name('web.profile.index');
 Route::put('profile', [LoginController::class, 'updateProfile'])
