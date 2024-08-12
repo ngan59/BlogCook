@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Comment;
 use App\Models\Dish;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,8 +14,8 @@ class DishController extends Controller
 {
     public function index()
     {
-        $dishs = Dish::paginate(10);
-        // $dishs = Dish::where('status', 1)->paginate(10); 
+        // $dishs = Dish::paginate(10);
+        $dishs = Dish::all();
         return view("admin.dish.list", compact("dishs"));
     }
     public function view($id)
@@ -36,7 +37,7 @@ class DishController extends Controller
                 'summary' => 'required',
                 'image' => 'required',
                 'description' => 'required',
-
+                'video_url' => 'nullable|url'
             ],
             [
                 'tittle.required' => 'Bạn chưa nhập tiêu đề',
@@ -83,6 +84,7 @@ class DishController extends Controller
                 'summary' => $request->summary,
                 'description' => $request->description,
                 'image' => $image,
+                'video_url' => $request->video_url,
                 'view_count' => 0,
                 'user_id' => Auth::id(), //lay id cua nguoi dung dang dang nhap
                 'new_post' => $request->new_post ? 1 : 0,
@@ -110,6 +112,8 @@ class DishController extends Controller
                 'title' => 'required',
                 'summary' => 'required',
                 'description' => 'required',
+                'new_post' => 'required_without:highlight_post',
+            'highlight_post' => 'required_without:new_post'
 
             ],
             [
@@ -117,6 +121,8 @@ class DishController extends Controller
                 'summary.required' => 'Bạn chưa nhập tóm tắt',
                 'description.required' => 'Bạn chưa nhập nội dung',
                 'id_category.required' => 'Bạn chưa nhập danh mục',
+                'new_post.required_without' => 'Bạn phải chọn ít nhất một trong hai: Bài viết mới hoặc Bài viết nổi bật.',
+            'highlight_post.required_without' => 'Bạn phải chọn ít nhất một trong hai: Bài viết mới hoặc Bài viết nổi bật.'
             ]
         );
 
@@ -164,4 +170,20 @@ class DishController extends Controller
         Dish::find($id)->delete();
         return redirect()->route("admin.dish.index")->with("success", "Xóa công thức thành công");
     }
+
+    public function showComments($id)
+{
+    $dish = Dish::with('comments')->findOrFail($id);
+    return view('admin.dish.comments', compact('dish'));
+}
+public function status($id)
+{
+    $comment = Comment::findOrFail($id);
+    $comment->status = !$comment->status;
+    $comment->save();
+
+    return redirect()->back()->with('success', 'Cập nhật trạng thái bình luận thành công.');
+}
+
+
 }

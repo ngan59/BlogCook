@@ -19,12 +19,8 @@ class WebController extends Controller
     public function home()
     {
         $highlight = Dish::where('highlight_post', 1)->where('status', 1)->get(); 
-        // $new = Dish::where('new_post', 1)->where('status', 1)->latest()->get(); // Only get approved new posts
-        // $highlight = Dish::where("highlight_post", "1")
-        //     ->take(3)->get();    
-        // $new = Dish::where("new_post", 1)->take(10)->get();
         $slides = Slide::all();
-        $new = Dish::where('new_post', 1)->where('status', 1)->paginate(5);
+        $new = Dish::where('new_post', 1)->where('status', 1)->paginate(10);
 
         return view("web.home", compact("highlight", "new", "slides"));
     }
@@ -35,15 +31,11 @@ class WebController extends Controller
         $dish->update([
             'view_count' => $dish->view_count + 1
         ]);
-        // $userEmail = Auth::user()->email;
         $reasons = CategoryReport::all();
         $relate = Dish::where('id_category', $dish->id_category)->whereNotIn('id', [$dish->id])->take(2)->get();
         //bai viet noi bat
-        $highlight = Dish::where("highlight_post", "1")
-            ->take(5)->get();
-
+        $highlight = Dish::where("highlight_post", "1")->take(5)->get();
         $comments = Comment::where('id_dish', $dish->id)->get();
-        // $comment = Comment::where("id_dish",$dish->id)->paginate(10);
         return view('web.dish', compact('dish', 'relate', 'highlight', 'comments','reasons',));
     }
 
@@ -90,7 +82,6 @@ class WebController extends Controller
     public function category()
     {
         $dishs = Dish::paginate(2);
-        //lay het category
         $categories = Category::all();
         return view('web.category', compact('dishs', 'categories'));
     }
@@ -99,7 +90,6 @@ class WebController extends Controller
     {
         $category = Category::where('slug', $slug)->first();
         $dishs = Dish::where('id_category', $category->id)->paginate(4);
-        //lay het category
         $categories = Category::all();
         return view('web.category', compact('dishs', 'categories',));
     }

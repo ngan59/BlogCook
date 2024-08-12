@@ -1,5 +1,7 @@
 @extends('admin.layout.master')
-
+@section('title')
+    Hồ sơ người dùng
+@endsection
 @section('content')
 
 <div id="page-wrapper">

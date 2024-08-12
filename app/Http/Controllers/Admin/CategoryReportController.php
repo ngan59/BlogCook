@@ -10,9 +10,7 @@ class CategoryReportController extends Controller
 {
     public function index()
     {
-        //get category
         $categories = CategoryReport::all();
-        // $categories = Category::paginate(3); phan trang
         return view("admin.categoryreport.list", compact("categories"));
     }
     public function create()
@@ -64,10 +62,6 @@ class CategoryReportController extends Controller
         $category = $category->update([
             "name" => $request->name,
         ]);
-        // Category::where("id", $id)->update([
-        //     "name" => $request->name,
-        // ]);
-
         return redirect()->route("admin.categoryreport.index")->with("success", "Cập nhật danh mục thành công");
     }
 

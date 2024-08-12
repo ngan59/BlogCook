@@ -13,9 +13,8 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        //get category
         $categories = Category::all();
-        // $categories = Category::paginate(3); phan trang
+       
         return view("admin.category.list", compact("categories"));
     }
     public function create()
@@ -55,7 +54,6 @@ class CategoryController extends Controller
     }
     public function edit($id)
     {
-        //tìm category theo id
         $category = Category::find($id);
         return view("admin.category.edit", compact("category"));
     }

@@ -64,6 +64,10 @@
                             <label>Hình ảnh</label>
                             <input type="file" class="form-control" name="image" accept="image/*" />
                         </div>
+                        {{-- <div class="form-group">
+                            <label>Video URL</label>
+                            <input class="form-control" name="video_url" placeholder="Bạn hãy nhập URL video" />
+                        </div> --}}
                             <div class="form-group">
                                 <label>Nội dung</label>
                                 <textarea id="editor1" name="description" class="ckeditor"></textarea>

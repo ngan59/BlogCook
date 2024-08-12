@@ -1,12 +1,9 @@
 @extends('admin.layout.master')
 
 @section('title')
-Admin Blog 
+Slide
 @endsection
-
-<!--day view vao: dung section -->
 @section('content')
-
 <div id="page-wrapper">
             <div class="container-fluid">
                 <div class="row">
@@ -25,16 +22,15 @@ Admin Blog
                                 <th>ID</th>
                                 <th>Tên slide</th>
                                 <th>Hình ảnh</th>
-                                {{-- <th>Nội dung slide</th> --}}
-                                <th>Số thự tự slide</th>
+                                <th>Số thự tự slide</th>    
                                 <th>Xem</th>
-                                <th>Xóa</th>
                                 <th>Sửa</th>
+                                <th>Xóa</th>
                             </tr>
                         </thead>
                         <tbody>
                             <!-- đổ data ra phần view -->
-                          @foreach ($slides as $slide)
+                          @foreach ($slides as $key=>$slide)
 
                             <tr class="odd gradeX" align="center">
                                 <td>{{$slide->id}}</td>
@@ -42,14 +38,20 @@ Admin Blog
                                 <td>
                                     <img src="{{ $slide->imageUrl() }}" alt=" " width="50px" height="auto">
                                 </td>
-                                {{-- <td>{{$slide->description}}</td> --}}
                                 <td>{{$slide->sortNumber}}</td>
                                 <td class="center">
-                                    <i class="fa fa-eye fa-fw"></i> 
-                                    <a href="{{ route('admin.slide.view', $slide->id) }}">Xem</a> 
+                                    <a href="{{ route('admin.slide.view', $slide->id) }}" class="btn btn-info"><i class="fa fa-pencil fa-fw"></i>Xem</a>
                                 </td>
-                                <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="{{route('admin.slide.delete',$slide->id)}}"> Xóa</a></td>
-                                <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="{{route('admin.slide.edit',$slide->id)}}">Sửa</a></td>
+                                <td class="center">
+                                    <a href="{{ route('admin.slide.edit', $slide->id) }}" class="btn btn-warning"><i class="fa fa-pencil fa-fw"></i>Sửa</a>
+                                </td>
+                                <td>
+                                    <form action="{{ route('admin.slide.delete', $slide->id) }}" method="POST" onsubmit="return confirm('Bạn có chắc chắn muốn xóa slide này?');">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger"><i class="fa fa-trash-o fa-fw"></i> Xóa</button>
+                                    </form>
+                                </td>
                             </tr>
 
                             

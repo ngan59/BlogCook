@@ -10,7 +10,7 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = User::paginate(3);
+        $users = User::paginate(10);
         // $users = User::all();
         return view("admin.user.list", compact("users"));
     }
@@ -25,28 +25,32 @@ class UserController extends Controller
             [
                 'name' => 'required',
                 'email' => 'required|unique:users|email',
-                'password' => 'required|min:3|max:32',
+                'password' => 'required|min:8|max:32',
                 'confirm' => 'required|same:password',
                 'role' => 'required',
+                'phone' => 'nullable|numeric|digits:10', 
             ],
             [
                 'name.required' => 'Bạn chưa nhập họ tên',
                 'email.required' => 'Bạn chưa nhập email',
                 'email.unique' => 'Email đã tồn tại',
-                'password.min' => 'Mật khẩu phải có độ dài từ 3 kí tự',
+                'password.min' => 'Mật khẩu phải có độ dài từ 8 kí tự',
                 'password.max' => 'Mật khẩu chỉ có tối đa 32 kí tự',
                 'confirm.required' => 'Bạn chưa nhập lại mật khẩu',
                 'confirm.same' => 'Mật khẩu không khớp',
+                'phone.numeric' => 'Số điện thoại phải là số',
+                'phone.digits' => 'Số điện thoại phải có 10 chữ số',
             ]
         );
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
+            'phone' => $request->phone,
             'password' => bcrypt($request->password),
             // Hash::make($request -> password),
             'role' => $request->role,
-            'follower' => $request->follower, // Sử dụng toán tử null coalescing để đảm bảo giá trị mặc định là 0 nếu giá trị được truyền vào là null
+            'follower' => $request->follower,
             'following' => $request->following,
         ]);
         return redirect()->route('admin.user.index')->with('success', 'Thêm người dùng thành công');
@@ -64,10 +68,13 @@ class UserController extends Controller
             [
                 'name' => 'required',
                 'role' => 'required',
+                'phone' => 'nullable|numeric|digits:10', 
             ],
             [
                 'name.required' => 'Bạn chưa nhập họ tên',
                 'email.required' => 'Bạn chưa nhập email',
+                'phone.numeric' => 'Số điện thoại phải là số',
+                'phone.digits' => 'Số điện thoại phải có 10 chữ số',
             ]
         );
         $user = User::find($id);
@@ -75,6 +82,7 @@ class UserController extends Controller
         $data = [
             'name' => $request->name,
             'role' => $request->role,
+            'phone' => $request->phone,
         ];
 
         // 
@@ -95,7 +103,7 @@ class UserController extends Controller
         }
 
         $user->update($data);
-        return redirect()->route('admin.user.edit', $user->id)->with('success', 'Cập nhật người dùng thành công');
+        return redirect()->route('admin.user.index', $user->id)->with('success', 'Cập nhật người dùng thành công');
     }
 
     public function delete($id)

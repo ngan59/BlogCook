@@ -1,7 +1,7 @@
 @extends('admin.layout.master')
 
 @section('title')
-    Category
+    Danh mục sự kiện
 @endsection
 
 <!--day view vao: dung section -->
@@ -11,9 +11,19 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">Category Event
-                            <small>List</small>
+                        <h1 class="page-header">Danh mục sự kiện
+                            <small>Thêm</small>
                         </h1>
+                        @if($errors->any())
+                        <div class="alert alert-danger">
+                            @foreach($errors->all() as $err)
+                                <p>{{ $err }}</p>
+                            @endforeach
+                        </div>
+                    @endif
+                    @if (session('success'))
+                        <div class="alert alert-success">{{ session('success') }}</div>
+                    @endif
                     </div>
                     @if (session('success'))
                         <div class = "alert alert-success"> {{session ('success')}}</div>       
@@ -24,9 +34,8 @@
                             <tr align="center">
                                 <th>ID</th>                              
                                 <th>Tên danh mục</th>
-                                {{-- <th>Title</th> --}}
-                                <th>Xóa</th>
                                 <th>Sửa</th>
+                                <th>Xóa</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -35,11 +44,17 @@
 
                             <tr class="odd gradeX" align="center">
                                 <td>{{ $loop->iteration }}</td>
-                                {{-- <td>{{$category->id}}</td> --}}
                                 <td>{{$categoryevent->name}}</td>
-                                {{-- <td>{{$categoryevent->title}}</td> --}}
-                                <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="{{route('admin.categoryevent.delete',$categoryevent->id)}}"> Xóa</a></td>
-                                <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="{{route('admin.categoryevent.edit',$categoryevent->id)}}">Sửa</a></td>
+                                <td class="center">
+                                    <a href="{{ route('admin.categoryevent.edit', $categoryevent->id) }}" class="btn btn-warning"><i class="fa fa-pencil fa-fw"></i>Sửa</a>
+                                </td>
+                                <td>
+                                    <form action="{{ route('admin.categoryevent.delete', $categoryevent->id) }}" method="POST" onsubmit="return confirm('Bạn có chắc chắn muốn xóa danh mục này?');">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger"><i class="fa fa-trash-o fa-fw"></i> Xóa</button>
+                                    </form>
+                                </td>
                             </tr>                           
                             @endforeach
                         </tbody>

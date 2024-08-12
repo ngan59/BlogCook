@@ -70,9 +70,6 @@
                                 <li>
                                     <a href="{{ route('admin.comment.index') }}">Danh sách bình luận</a>
                                 </li>
-                                {{-- <li>
-                                    <a href="#"></a>
-                                </li> --}}
                             </ul>
         <!-- /.nav-second-level -->
 
@@ -89,17 +86,14 @@
             </ul>
 <!-- /.nav-second-level -->
 
-</li>
+{{-- </li>
     <li>
         <a href="#"><i class="fa fa-bug fa-fw"></i> Quản lý báo cáo<span class="fa arrow"></span></a>
         <ul class="nav nav-second-level">
             <li>
                 <a href="{{ route('admin.report.index') }}">Danh sách báo cáo</a>
             </li>
-            {{-- <li>
-                <a href="#">Thêm báo cáo</a>
-            </li> --}}
-        </ul>
+        </ul> --}}
         <!-- /.nav-second-level -->
     </li>
     <li>
@@ -126,7 +120,7 @@
         </ul>
         <!-- /.nav-second-level -->
     </li>
-    <li>
+    {{-- <li>
         <a href="#"><i class="fa fa-user-secret fa-fw"></i> Người tham gia sự kiện<span class="fa arrow"></span></a>
         <ul class="nav nav-second-level">
             <li>
@@ -135,15 +129,15 @@
 
         </ul>
         <!-- /.nav-second-level -->
-    </li>
+    </li> --}}
     <li>
         <a href="{{ route('admin.contact.index') }}"><i class="fa fa-phone fa-fw"></i> Liên hệ</a>
 
     </li>
 
 </li>
-<li>
+{{-- <li>
     <a href="{{ route('web.home')}}"><i class="fa fa-arrow-right fa-fw"></i> Chuyển hướng đến Blog</a>
 
-</li>
+</li> --}}
 </ul>

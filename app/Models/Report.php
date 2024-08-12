@@ -7,30 +7,38 @@ use Illuminate\Database\Eloquent\Model;
 
 class Report extends Model
 {
+    use HasFactory;
+
     protected $table = 'report';
+
     protected $fillable = [
-    'report_reason',
-    'status',
-    'user_id',
-    'id_comment',
-    'id_dish',
+        'report_reason',
+        'status',
+        'user_id',
+        'id_comment',
+        'id_dish',
+        'id_categoryreport',
     ];
+
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
+    public function comment()
+    {
+        return $this->belongsTo(Comment::class, 'id_comment', 'id');
     }
 
     public function dish()
     {
-        return $this->belongsTo(Dish::class);
+        return $this->belongsTo(Dish::class, 'id_dish', 'id');
     }
 
-    public function comments()
+    public function categoryReport()
     {
-        return $this->belongsTo(Comment::class);
-    }
-    public function categoryreport()
-    {
-        return $this->belongsTo(CategoryReport::class,'id','id');
+        return $this->belongsTo(CategoryReport::class, 'id_categoryreport', 'id');
     }
 }
+
+

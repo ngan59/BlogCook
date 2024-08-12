@@ -30,6 +30,10 @@
                             <input class="form-control" name="email" type="email" placeholder="Nhập email" />
                         </div>
                         <div class="form-group">
+                            <label for="phone">Số điện thoại</label>
+                            <input type="text" class="form-control" id="phone" name="phone" pattern="\d{10}" maxlength="10" placeholder="Nhập số điện thoại 10 số">
+                        </div>                        
+                        <div class="form-group">
                             <label>Mật khẩu</label>
                             <input class="form-control" name="password" type="password" placeholder="Nhập mật khẩu" />
                         </div>

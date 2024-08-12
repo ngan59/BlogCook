@@ -1,7 +1,7 @@
 @extends('admin.layout.master')
 
 @section('title')
-    Contact
+    Lời nhắn
 @endsection
 <!--day view vao: dung section -->
 @section('content')
@@ -41,7 +41,13 @@
                                 <td>{{$contact->phone}}</td>
                                 <td>{{$contact->subject}}</td>
                                 <td>{{$contact->message}}</td>
-                                <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="{{route('admin.contact.delete',$contact->id)}}"> Xóa</a></td>
+                                <td>
+                                    <form action="{{ route('admin.contact.delete', $contact->id) }}" method="POST" onsubmit="return confirm('Bạn có chắc chắn muốn xóa lời nhắn này?');">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger"><i class="fa fa-trash-o fa-fw"></i> Xóa</button>
+                                    </form>
+                                </td>
                             </tr>
                             @endforeach   
                         </tbody>

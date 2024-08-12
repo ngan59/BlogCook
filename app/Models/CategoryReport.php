@@ -14,6 +14,6 @@ class CategoryReport extends Model
     ];
     public function report()
     {
-        return $this->hasMany(Report::class);
+        return $this->hasMany(Report::class,'id_categoryreport','id');
     }
 }

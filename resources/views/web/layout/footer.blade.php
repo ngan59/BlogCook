@@ -25,32 +25,15 @@
                     </div><!-- end footer-text -->
                 </div><!-- end widget -->
             </div><!-- end col -->
-
-            {{-- <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
-                <div class="widget">
-                    <h2 class="widget-title">Popular Categories</h2>
-                    <div class="link-widget">
-                        <ul>
-                            <li><a href="#">Marketing <span>(21)</span></a></li>
-                            <li><a href="#">SEO Service <span>(15)</span></a></li>
-                            <li><a href="#">Digital Agency <span>(31)</span></a></li>
-                            <li><a href="#">Make Money <span>(22)</span></a></li>
-                            <li><a href="#">Blogging <span>(66)</span></a></li>
-                        </ul>
-                    </div><!-- end link-widget -->
-                </div><!-- end widget -->
-            </div><!-- end col --> --}}
-
             <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
                 <div class="widget">
                     <h2 class="widget-title">Copyrights</h2>
                     <div class="link-widget">
                         <ul>
-                            <li><a href="#">About us</a></li>
-                            <li><a href="#">Advertising</a></li>
-                            <li><a href="#">Write for us</a></li>
-                            <li><a href="#">Trademark</a></li>
-                            <li><a href="#">License & Help</a></li>
+                            <li><a href="/">Trang chủ</a></li>
+                            <li><a href="/category">Danh mục</a></li>
+                            <li><a href="/categoryevent">Sự kiện</a></li>
+                            <li><a href="/contact">Liên hệ</a></li>
                         </ul>
                     </div><!-- end link-widget -->
                 </div><!-- end widget -->

@@ -37,7 +37,7 @@
                                     <p style="color:#455056; font-size:15px;line-height:24px;">
                                         Here is your link reset:
                                     </p>
-                                    <h2 style="background: #00466a;margin: 0 auto;width: max-content;padding: 0 10px;color: #fff;border-radius: 4px;">
+                                    <h2 style="background: #89b9d1;margin: 0 auto;width: max-content;padding: 0 10px;color: #fff;border-radius: 4px;">
                                         <a href="{{ route("form-reset") }}?token={{ \Illuminate\Support\Facades\Crypt::encryptString($email) }}">Click Here!</a></h2>
                                 </td>
                             </tr>

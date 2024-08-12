@@ -3,9 +3,17 @@
 @section('content')
     <div class="container"> <br><br>
         <h1 class="my-4">Quản lý bài viết</h1>
-
+        @if (session('success'))
+        <div class = "alert alert-success"> {{ session('success') }}</div>
+    @endif
+    @if (session('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+    @endif
+    
         @if ($dish->isEmpty())
-            <div class="alert alert-info">
+            <div class="alert alert-info ">
                 <strong>Bạn chưa đăng bài viết nào.</strong>
             </div>
         @else
@@ -19,24 +27,25 @@
                         <th>Lượt xem</th>
                         <th>Ngày đăng</th>
                         <th>Trạng thái</th>
-                        {{-- <th>Hành động</th> --}}
+                        <th>Chỉnh sửa</th>
+                        <th>Xóa</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($dish as $key => $dishes)
                         <tr>
                             <td>{{ $key}}</td>
-                            {{-- <td>
+                            <td>
                                 @if ($dishes->status == 1)
-                                    <a href="#">{{ $dishes->title }}</a>
+                                    <a href="{{ route('web.dish', $dishes->slug) }}">{{ $dishes->title }}</a>
                                 @else
                                     <a href="#" onclick="alert('Bài viết chưa được duyệt nên bạn không thể xem')">{{ $dishes->title }}</a>
                                 @endif
-                            </td> --}}
-                            <td>
+                            </td>
+                            {{-- <td>
                                 <p style=" display: -webkit-box; -webkit-line-clamp: 1;  -webkit-box-orient: vertical; overflow: hidden;"> {{ $dishes->title }}</p>
 
-                            </td>
+                            </td> --}}
                             <td>
                                 <img src="{{ $dishes->imageUrl() }}" alt="Hình ảnh" width="100px" height="auto">
                             </td>
@@ -55,20 +64,13 @@
                                     </p>
                                 @endif
                             </td>
-                            {{-- <td>
-                                <a href="{{ route('manage.delete', $dishes->id) }}" class="text-danger"> <i class="fa fa-eye"></i> Xóa </a>
-                                &nbsp;|&nbsp;
-                                <a href="#" class="text-warning"><i class="fa fa-pencil"></i>Sửa </a>
-                                &nbsp;|&nbsp;
-                                <form action="#" method="POST" style="display:inline;"
-                                    onsubmit="return confirm('Bạn có chắc chắn muốn xóa bài viết này?')">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="text-danger" style="border:none; background:none;">
-                                        <i class="fa fa-trash-o"></i> Xóa
-                                    </button>
-                                </form>
-                            </td> --}}
+                            <td>
+                                <a href="{{ route('manage.edit', $dishes->id) }}" class="box box1" ><i class="fa fa-pencil fa-fw" ></i> Sửa</a>       
+                            </td>
+                            <td>                            
+                                <a href="{{ route('manage.delete', $dishes->id) }}"  class="boxBox box1" onclick="return confirm('Bạn có chắc chắn muốn xóa công thức này?')"><i class="fa fa-trash-o fa-fw "></i> Xóa</a>  
+                            </td>
+
                         </tr>
                     @endforeach
                 </tbody>

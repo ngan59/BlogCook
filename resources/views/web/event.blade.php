@@ -24,7 +24,7 @@
                         <div class="blog-meta big-meta">
                             <small>{{ \Carbon\Carbon::parse($event->start_date)->format('d-m-Y') }}</small>
                             {{-- <small>{{ $event->user->name }}</small> --}}
-                            <small><i class="fa fa-eye"></i> {{ $event->view_count }}</small>
+                            <small><i class="fa fa-users"></i> {{ $event->users->count() }}</small>
                         </div><!-- end meta -->
 
                         <div class="post-sharing">
@@ -35,17 +35,11 @@
                                         <span class="down-mobile">Share on Facebook</span>
                                     </a>
                                 </li>
-                                <li>
-                                    <a href="#" class="tw-button btn btn-primary">
-                                        <i class="fa fa-twitter"></i>
-                                        <span class="down-mobile">Tweet on Twitter</span>
-                                    </a>
-                                </li>
-                                <li>
+                                {{-- <li>
                                     <a href="#" class="gp-button btn btn-primary">
                                         <i class="fa fa-google-plus"></i>
                                     </a>
-                                </li>
+                                </li> --}}
                             </ul>
                         </div><!-- end post-sharing -->
                     </div><!-- end title -->
@@ -60,10 +54,10 @@
                             <p>{!! $event->description !!}</p>
                         </div><!-- end pp -->
                     </div><!-- end content -->
-                    <div class="w3-container">        
+                    {{-- <div class="w3-container">        
                         <p><button class="w3-button w3-block w3-teal">Đăng kí sự kiện</button></p>
                                          
-                        </div>
+                        </div> --}}
 
                     <hr class="invis1">
 

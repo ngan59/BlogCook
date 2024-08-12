@@ -1,7 +1,7 @@
 @extends('admin.layout.master')
 
 @section('title')
-    Dish
+    Món ăn
 @endsection
 <!--day view vao: dung section -->
 @section('content')
@@ -31,11 +31,11 @@
                                 <th>ID</th>
                                 <th>Tiêu đề</th>                                
                                 <th>Slug</th>
-                                {{-- <th>Tóm tắt</th> --}}
                                 <th>Hình ảnh</th>
                                 <th>Danh mục</th>
                                 <th>Bài viết nổi bật</th>
                                 <th>Bài viết mới</th>
+                                <th>Bình luận</th>
                                 <th>Trạng thái</th>
                                 <th>Xem</th>
                                 <th>Xóa</th>
@@ -48,11 +48,14 @@
                                     <td>{{ $dish->id}}</td>
                                     <td>{{ $dish->title }}</td>
                                     <td>{{ $dish->slug }}</td>
-                                    <td><img src="{{ $dish->imageUrl() }}" alt="" width="50px" height="auto">
-                                    </td>
+                                    <td><img src="{{ $dish->imageUrl() }}" alt="" width="50px" height="auto"></td>
                                     <td>{{ $dish->category->name }}</td>
                                     <td>{{ $dish->highlight_post == 1 ? 'x' : '' }}</td>
                                     <td>{{ $dish->new_post == 1 ? 'x' : '' }}</td>
+                                    <td class="center">
+                                        <i class="fa fa-comments fa-fw"></i>
+                                        <a href="{{ route('admin.dish.comments', $dish->id) }}">Bình luận</a>
+                                    </td>
                                     <td>
                                         @if ($dish->status == 1)
                                             <p class="text text-success">
@@ -65,23 +68,26 @@
                                         @endif
                                     </td>
                                     <td class="center">
-                                        <i class="fa fa-eye fa-fw"></i> 
-                                        <a href="{{ route('admin.dish.view', $dish->id) }}">Xem</a> 
+                                        <a href="{{ route('admin.dish.view', $dish->id) }}" class="btn btn-info"><i class="fa fa-pencil fa-fw"></i>Xem</a>
                                     </td>
                                     <td class="center">
-                                        <i class="fa fa-trash-o fa-fw"></i>
-                                        <a href="{{ route('admin.dish.delete', $dish->id) }}">Xóa</a>
+                                        <a href="{{ route('admin.dish.edit', $dish->id) }}" class="btn btn-warning"><i class="fa fa-pencil fa-fw"></i>Sửa</a>
                                     </td>
-                                    <td class="center">
-                                        <i class="fa fa-pencil fa-fw"></i>
-                                        <a href="{{ route('admin.dish.edit', $dish->id) }}">Sửa</a>
+                                    <td>
+                                        <form action="{{ route('admin.dish.delete', $dish->id) }}" method="POST" onsubmit="return confirm('Bạn có chắc chắn muốn xóa công thức này?');">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger">
+                                                <i class="fa fa-trash-o fa-fw"></i> Xóa
+                                            </button>
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach
                         </tbody>
                     </table>
                     <!-- Pagination -->
-                    {!! $dishs->links('pagination::bootstrap-4') !!}
+                    {{-- {!! $dishs->links('pagination::bootstrap-4') !!} --}}
                 </div>
             </div>
             <!-- /.row -->

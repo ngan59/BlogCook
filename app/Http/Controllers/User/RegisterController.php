@@ -19,8 +19,10 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ], [
+            'password' => ['required', 'string', 'min:8', 'max:32','regex:/[A-Z]/','regex:/[@$!%*?&#]/','confirmed'],
+            'phone' => ['required', 'numeric', 'digits:10'],
+        ], 
+        [
             'name.required' => 'Tên là bắt buộc.',
             'name.string' => 'Tên phải là chuỗi ký tự.',
             'name.max' => 'Tên không được dài quá 255 ký tự.',
@@ -32,7 +34,12 @@ class RegisterController extends Controller
             'password.required' => 'Mật khẩu là bắt buộc.',
             'password.string' => 'Mật khẩu phải là chuỗi ký tự.',
             'password.min' => 'Mật khẩu phải có độ dài ít nhất là 8 ký tự.',
+            'password.max' => 'Mật khẩu chỉ có tối đa 32 kí tự',
             'password.confirmed' => 'Xác nhận mật khẩu không khớp.',
+            'password.regex' => 'Mật khẩu phải chứa ít nhất 1 ký tự in hoa và 1 ký tự đặc biệt.',
+            'phone.required' => 'Số điện thoại là bắt buộc.',
+            'phone.numeric' => 'Số điện thoại phải là số.',
+            'phone.digits' => 'Số điện thoại phải có 10 chữ số.',
         ]);
     }
 
@@ -42,6 +49,7 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'phone' => $data['phone'],
         ]);
     }
 

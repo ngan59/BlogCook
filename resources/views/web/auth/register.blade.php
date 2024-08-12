@@ -11,7 +11,7 @@
                                 @csrf
                                 <div class="container">
                                     <label for="name"><b>Tên người dùng</b></label>
-                                    <input type="text" placeholder="Nhập tên của bạn" name="name" id="name" value="{{ old('name') }}" required>
+                                    <input type="text" placeholder="Nhập tên người dùng của bạn" name="name" id="name" value="{{ old('name') }}" required>
                                     @error('name')
                                         <div class="error">{{ $message }}</div>
                                     @enderror
@@ -21,15 +21,27 @@
                                     @error('email')
                                         <div class="error">{{ $message }}</div>
                                     @enderror
-                                
+
+                                    <label for="phone"><b>Số điện thoại</b></label>
+                                    <input type="text" placeholder="Nhập số điện thoại của bạn" name="phone" id="phone" value="{{ old('phone') }}" required>
+                                    @error('phone')
+                                        <div class="error">{{ $message }}</div>
+                                    @enderror
+                                    
                                     <label for="password"><b>Mật khẩu</b></label>
-                                    <input type="password" placeholder="Nhập password của bạn" name="password" id="password" required>
+                                    <div class="password-container">
+                                        <input type="password" placeholder="Nhập mật khẩu của bạn" name="password" id="password" required>
+                                        <i class="fa fa-eye" id="togglePassword" style="cursor: pointer;"></i>
+                                    </div>                                   
                                     @error('password')
                                         <div class="error">{{ $message }}</div>
                                     @enderror
                                 
                                     <label for="password_confirmation"><b>Nhập lại mật khẩu</b></label>
-                                    <input type="password" placeholder="Nhập lại mật khẩu của bạn" name="password_confirmation" id="password_confirmation" required>
+                                    <div class="password-container">
+                                        <input type="password" placeholder="Nhập lại mật khẩu của bạn" name="password_confirmation" id="password_confirmation" required>
+                                        <i class="fa fa-eye" id="togglePasswordConfirmation" style="cursor: pointer;"></i>
+                                    </div>
                                     @error('password_confirmation')
                                         <div class="error">{{ $message }}</div>
                                     @enderror
@@ -50,43 +62,20 @@
         </div><!-- end row -->
     </div><!-- end container -->
 </section>
-<style>
-    input[type=text], input[type=password] {
-        width: 100%;
-        padding: 15px;
-        margin: 5px 0 22px 0;
-        display: inline-block;
-        border: none;
-        background: #f1f1f1;
-    }
-    
-    input[type=text]:focus, input[type=password]:focus {
-        background-color: #ddd;
-        outline: none;
-    }
-    
-    .registerbtn {
-        background-color: #04AA6D;
-        color: white;
-        padding: 16px 20px;
-        margin: 8px 0;
-        border: none;
-        cursor: pointer;
-        width: 100%;
-        opacity: 0.9;
-    }
-    
-    .registerbtn:hover {
-        opacity: 1;
-    }
+<script>
+    document.getElementById('togglePassword').addEventListener('click', function () {
+    const passwordField = document.getElementById('password');
+    const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+    passwordField.setAttribute('type', type);
+    this.classList.toggle('fa-eye-slash');
+});
 
-    .signin {
-        background-color: white;
-        text-align: center;
-    }
+document.getElementById('togglePasswordConfirmation').addEventListener('click', function () {
+    const passwordField = document.getElementById('password_confirmation');
+    const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+    passwordField.setAttribute('type', type);
+    this.classList.toggle('fa-eye-slash');
+});
 
-    .error {
-        color: red;
-    }
-</style>
+</script>
 @endsection

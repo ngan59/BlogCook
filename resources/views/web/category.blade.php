@@ -10,7 +10,6 @@
                             <h2 class="widget-title">
                                 <div class="trend-videos">
                                     <div class="blog-box">
-
                                         <div class="blog-meta">
                                             @foreach ($categories as $category)
                                                 <h4><a href="{{ route('web.category', $category->slug) }}"
@@ -20,11 +19,8 @@
                                     </div><!-- end blog-box -->
                                 </div><!-- end videos -->
                         </div><!-- end widget -->
-
-
                     </div><!-- end sidebar -->
                 </div><!-- end col -->
-
                 <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
                     <div class="page-wrapper">
                         <div class="blog-grid-system">
@@ -53,21 +49,17 @@
                                     <div class="col-md-12 text-center">
                                         <p>Hiện tại không có bài viết nào trong danh mục này.</p>
                                     </div><!-- end col -->
-                                @endforelse
-                                    
+                                @endforelse                                  
                             </div><!-- end row -->
                         </div><!-- end blog-grid-system -->
                     </div><!-- end page-wrapper -->
-
                     <hr class="invis3">
-
                     <div class="row">
                         <div class="col-md-12">
                             {!!$dishs ->links('pagination::bootstrap-4') !!}
                         </div><!-- end col -->
                     </div><!-- end row -->
                 </div><!-- end col -->
-
             </div><!-- end row -->
         </div><!-- end container -->
     </section>

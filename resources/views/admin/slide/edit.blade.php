@@ -20,9 +20,9 @@
                     @if (session('success'))
                         <div class = "alert alert-success"> {{session ('success')}}</div>       
                     @endif
-                </div>
-                   
+                </div>                 
                     <!-- /.col-lg-12 -->
+                    
                     <form action="{{ route("admin.slide.update", $slide->id) }}" enctype="multipart/form-data" method="POST">
                         @csrf
                         @method ('put') 

@@ -20,8 +20,7 @@ return new class extends Migration
 
             $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
             $table->foreign('id_dish')->references('id')->on('dish')->cascadeOnDelete();
-            $table->foreign('id_comment')->references('id')->on('comments')
-                ->cascadeOnDelete();
+            $table->foreign('id_comment')->references('id')->on('comments')->cascadeOnDelete();
 
 
             $table->index('user_id');

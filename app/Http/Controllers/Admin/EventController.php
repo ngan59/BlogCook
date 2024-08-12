@@ -28,37 +28,14 @@ class EventController extends Controller
     }
     public function store(Request $request)
     {
-        $data = $request->validate(
-            [
-                'eventcategories_id' => 'required',
-                'title' => 'required',
-                'image' => 'required',
-                'description' => 'required',
-                'create_date' => 'required|date|after_or_equal:today',
-            ],
-            [
-                'title.required' => 'Bạn chưa nhập tên thể loại',
-                'image.required' => 'Bạn chưa tải hình ảnh',
-                'description.required' => 'Bạn chưa nhập nội dung',
-                'eventcategories_id.required' => 'Bạn chưa nhập danh mục',
-                'create_date.required' => 'Bạn chưa chọn ngày tạo',
-                'create_date.date' => 'Ngày tạo không hợp lệ',
-                'create_date.after_or_equal' => 'Ngày tạo phải là ngày hôm nay hoặc sau đó',
-            ]
-        );
-        //2 slug trung nhau 
-        $slug = Str::slug($request->title);
-        $checkSlug = Event::where('slug', $slug)->first();
-        while ($checkSlug) {
-            $slug = $checkSlug->slug . Str::random(2);
-        }
+        $data = $this->validateEvent($request);
+     
+        $slug = $this->generateUniqueSlug($request->title);
 
         if ($request->hasFile('image')) {
             $file = $request->file('image');
             $name_file = $file->getClientOriginalName();
-
             $extension = pathinfo($name_file, PATHINFO_EXTENSION);
-
             if (
                 strnatcasecmp($extension, 'jpg') == 0
                 || strnatcasecmp($extension, 'png') == 0
@@ -81,7 +58,9 @@ class EventController extends Controller
                 'description' => $request->description,
                 'user_id' => Auth::id(),
                 'eventcategories_id' => $request->eventcategories_id,
-                'create_date' => $request->create_date,
+                'start_date' => $request->start_date,
+                'end_date' => $request->end_date,
+                'location' => $request->location,
             ]
         );
         return redirect()->route("admin.event.index")->with("success", "Thêm sự kiện thành công");
@@ -96,51 +75,17 @@ class EventController extends Controller
 
     public function update(Request $request, $id)
     {
-        $data = $request->validate(
-            [
-                'eventcategories_id' => 'required',
-                'title' => 'required',
-                'image' => 'required',
-                'description' => 'required',
-                'create_date' => 'required|date|after_or_equal:today',
-            ],
-            [
-                'title.required' => 'Bạn chưa nhập tên thể loại',
-                'image.required' => 'Bạn chưa tải hình ảnh',
-                'description.required' => 'Bạn chưa nhập nội dung',
-                'eventcategories_id.required' => 'Bạn chưa nhập danh mục',
-                'create_date.required' => 'Bạn chưa chọn ngày tạo',
-                'create_date.date' => 'Ngày tạo không hợp lệ',
-                'create_date.after_or_equal' => 'Ngày tạo phải là ngày hôm nay hoặc sau đó',
-            ]
-        );
-        //2 slug trung nhau 
-        $slug = Str::slug($request->title);
 
-        $checkSlug = Event::where('slug', $slug)->first();
-        while ($checkSlug) {
-            $slug = $checkSlug->slug . Str::random(2);
-        }
-
+        $data = $this->validateEvent($request);
+        $slug = $this->generateUniqueSlug($request->title);
 
         if ($request->hasFile('image')) {
             $file = $request->file('image');
             $name_file = $file->getClientOriginalName();
-
             $extension = pathinfo($name_file, PATHINFO_EXTENSION);
-
-
-            if (
-                strnatcasecmp($extension, 'jpg') == 0
-                || strnatcasecmp($extension, 'png') == 0
-                || strnatcasecmp($extension, 'jepg') == 0
-                || strnatcasecmp($extension, 'jpeg') == 0
-            ) {
-
-
+            if (in_array(strtolower($extension), ['jpg', 'png', 'jpeg'])) {
                 $image = Str::random(5) . "_" . $name_file;
-
-                while (file_exists("image/event" . $image)) {
+                while (file_exists("image/event/" . $image)) {
                     $image = Str::random(5) . "_" . $name_file;
                 }
                 $file->move('image/event', $image);
@@ -148,13 +93,16 @@ class EventController extends Controller
         }
 
         $event = Event::find($id);
+
         $event->update([
             'title' => $request->title,
             'slug' => $slug,
             'image' => isset($image) ? $image : $event->image,
             'description' => $request->description,
             'eventcategories_id' => $request->eventcategories_id,
-            'create_date' => $request->create_date,
+            'start_date' => $request->start_date,
+            'end_date' => $request->end_date,
+            'location' => $request->location,
         ]);
 
         return redirect()->route("admin.event.index", $id)->with("success", "Cập nhật sự kiện thành công");
@@ -162,7 +110,54 @@ class EventController extends Controller
 
     public function delete($id)
     {
-        Event::find($id)->delete();
+        $event = Event::findOrFail($id);
+        $event->delete();        
         return redirect()->route("admin.event.index", $id)->with("success", "Xóa sự kiện thành công");
+    }
+
+    public function participants($id)
+    {
+        $event = Event::findOrFail($id);
+        $participants = $event->users;
+        return view('admin.event.participants', compact('event', 'participants'));
+    }
+    private function validateEvent(Request $request)
+    {
+        return $request->validate([
+            'eventcategories_id' => 'required',
+            'title' => 'required',
+            'image' => 'nullable|image|mimes:jpg,png,jpeg',
+            'description' => 'required',
+            'start_date' => 'required|date|after_or_equal:today',
+            'end_date' => 'required|date|after_or_equal:start_date',
+            'location' => 'required',
+        ], 
+        [
+            'title.required' => 'Bạn chưa nhập tên sự kiện',
+            'image.image' => 'Hình ảnh không hợp lệ',
+            'description.required' => 'Bạn chưa nhập nội dung',
+            'eventcategories_id.required' => 'Bạn chưa chọn danh mục',
+            'start_date.required' => 'Bạn chưa chọn ngày bắt đầu',
+            'start_date.date' => 'Ngày bắt đầu không hợp lệ',
+            'start_date.after_or_equal' => 'Ngày bắt đầu phải là ngày hôm nay hoặc sau đó',
+            'end_date.required' => 'Bạn chưa chọn ngày kết thúc',
+            'end_date.date' => 'Ngày kết thúc không hợp lệ',
+            'end_date.after_or_equal' => 'Ngày kết thúc phải sau hoặc bằng ngày bắt đầu',
+            'location.required' => 'Bạn chưa nhập tên địa chỉ',
+        ]);
+    }
+
+    private function generateUniqueSlug($title)
+    {
+        $slug = Str::slug($title);
+        $originalSlug = $slug;
+        $i = 1;
+
+        while (Event::where('slug', $slug)->exists()) {
+            $slug = $originalSlug . '-' . $i;
+            $i++;
+        }
+
+        return $slug;
     }
 }

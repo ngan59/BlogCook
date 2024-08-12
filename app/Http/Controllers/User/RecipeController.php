@@ -74,7 +74,7 @@ class RecipeController extends Controller
                 'description' => $request->description,
                 'image' => $image,
                 'view_count' => 0,
-                'user_id' => Auth::id(), //lay id cua nguoi dung dang dang nhap
+                'user_id' => Auth::id(),
                 'new_post' => $request->new_post ? 1 : 0,
                 'slug' => $slug,
                 'id_category' => $request->id_category,

@@ -21,7 +21,6 @@
                         <div class = "alert alert-success"> {{session ('success')}}</div>       
                     @endif
                 </div>
-                   
                     <!-- /.col-lg-12 -->
                     <form action="{{ route("admin.categoryevent.update", $categoryevent -> id) }}" method="POST">
                         @csrf
@@ -30,7 +29,6 @@
                             <label>Tên danh mục sự kiện</label>
                             <input class="form-control" name="name" placeholder="Nhập danh mục sự kiện..." />
                         </div>
-
                         <button type="submit" class="btn btn-primary">Chỉnh sửa</button>
                         <button type="reset" class="btn btn-default">Hủy bỏ</button>
                         <button type="reset" class="btn btn-default"> <a href="{{ route('admin.categoryevent.index')}}">Quay lại </a></button>

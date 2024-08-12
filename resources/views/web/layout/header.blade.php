@@ -10,73 +10,34 @@
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="/">Home</a>
+                        <a class="nav-link" href="/">Trang chủ</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/category">Category</a>
+                        <a class="nav-link" href="/category">Danh mục</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/categoryevent">Event</a>
+                        <a class="nav-link" href="/categoryevent">Sự kiện</a>
                     </li>
-                    {{-- <li class="nav-item">
-                        <a class="nav-link" href="/web/tech-category-03.html">Reviews</a>
-                    </li> --}}
                     <li class="nav-item">
-                        <a class="nav-link" href="/contact">Contact Us</a>
+                        <a class="nav-link" href="/contact">Liên hệ</a>
                     </li>
                 </ul>
-
-                {{-- @if (Illuminate\Support\Facades\Auth::check())
-                <a class="btn custom-btn-primary mr-2" href="#">Đăng Bài Viết</a>
-                @endif
-
-                <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle custom-dropdown-toggle" type="button" id="dropdownMenuButton"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fas fa-user"></i>
-                </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-
-                        <a class="dropdown-item" href="#">Đăng nhập</a>
-                        <a class="dropdown-item" href="#">Đăng kí</a>
-
-                        @if (Illuminate\Support\Facades\Auth::check())
-                            <a class="dropdown-item" href="#">Đăng xuất</a>
-                        @endif
-
-                    </div>
-                </div>
                 
-                <ul class="navbar-nav mr-2">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#"> Đăng nhập</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#"><i class="fa fa-android"> Đăng kí</i></a>
-                        </li>
-                        @if (Illuminate\Support\Facades\Auth::check())
-                        <li class="nav-item">
-                            <a class="nav-link" href="#"><i class="fa fa-apple">Đăng xuất</i></a>
-                        </li>
-                        @endif
-                    </ul> --}}
-
-                {{-- Check if user is authenticated --}}
                 @if (Illuminate\Support\Facades\Auth::check())
-                {{-- Dropdown menu for authenticated users --}}
-                <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle custom-dropdown-toggle" type="button"-
-                        id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fa fa-user"></i> 
-                        {{ Auth::user()->name }}
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="{{route('web.profile.index')}}">Thông tin người dùng</a>
-                        <a class="dropdown-item" href="{{ route('manage.index') }}">Quản lý bài viết</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="{{route('web.auth.logout')}}">Đăng xuất</a>
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle custom-dropdown-toggle" type="button"-
+                            id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-user"></i> 
+                            {{ Auth::user()->name }}
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="{{route('web.profile.index')}}">Thông tin người dùng</a>
+                            <a class="dropdown-item" href="{{ route('manage.index') }}">Quản lý bài viết</a>
+                            <a class="dropdown-item" href="{{ route('manage.report.index') }}">Quản lý báo cáo</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="{{route('web.auth.logout')}}">Đăng xuất</a>
+                        </div>
                     </div>
-                </div>
             @else
                 {{-- Dropdown menu for guests --}}
                 <div class="dropdown">

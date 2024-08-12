@@ -24,21 +24,21 @@
                                     <p><strong>Slug:</strong> {{ $dish->slug }}</p>
                                     <p><strong>Danh Mục:</strong> {{ $dish->category->name }}</p>
                                     <p><strong>Tóm Tắt:</strong> {{ $dish->summary }}</p>
-                                    <p><strong>Trạng Thái:</strong> 
+                                    <p><strong>Trạng Thái:</strong>
                                         @if ($dish->status == 1)
                                             <span class="label label-success">Đã Duyệt</span>
                                         @else
                                             <span class="label label-danger">Chưa Duyệt</span>
                                         @endif
                                     </p>
-                                    <p><strong>Bài Viết Mới:</strong> 
+                                    <p><strong>Bài Viết Mới:</strong>
                                         @if ($dish->new_post)
                                             <span class="label label-info">Có</span>
                                         @else
                                             <span class="label label-default">Không</span>
                                         @endif
                                     </p>
-                                    <p><strong>Bài Viết Nổi Bật:</strong> 
+                                    <p><strong>Bài Viết Nổi Bật:</strong>
                                         @if ($dish->highlight_post)
                                             <span class="label label-warning">Có</span>
                                         @else
@@ -48,7 +48,8 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <p><strong>Hình Ảnh:</strong></p>
-                                    <img src="{{ $dish->imageUrl() }}" alt="{{ $dish->title }}" class="img-responsive" style="max-width: 300px;">
+                                    <img src="{{ $dish->imageUrl() }}" alt="{{ $dish->title }}" class="img-responsive"
+                                        style="max-width: 300px;">
                                 </div>
                             </div>
                             <div class="row">

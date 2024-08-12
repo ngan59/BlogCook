@@ -30,10 +30,9 @@ class SlideController extends Controller
         $data = $request->validate(
             [
                 "name" => "required",
-                // "image"=> "required|image|mimes:jpg,png,jpeg|max:2048",
                 'image' => 'required',
                 "description" => "required",
-                "sortNumber" => "required|integer|min:0",
+                "sortNumber" => "required|integer|min:0|max:10",
             ],
             [
                 'name.required' => 'Bạn chưa nhập tên slide',
@@ -42,6 +41,7 @@ class SlideController extends Controller
                 'sortNumber.required' => 'Bạn chưa nhập số thứ tự',
                 'sortNumber.integer' => 'Số thứ tự phải là một số nguyên',
                 'sortNumber.min' => 'Số thứ tự phải là một số không âm',
+                'sortNumber.max' => 'Số thứ tự chỉ đến 10',
             ]
         );
 

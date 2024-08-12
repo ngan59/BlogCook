@@ -46,38 +46,24 @@
 
     
 </script>
-
-{{-- <script>
-   document.getElementById('reportForm').addEventListener('submit', function(event) {
-    event.preventDefault(); // Ngăn chặn việc gửi form theo cách thông thường
-
-    var reportReason = document.getElementById('reportReason').value;
-    var dishId = document.querySelector('input[name="dish_id"]').value;
-
-    var formData = new FormData();
-    formData.append('reason', reportReason);
-    formData.append('dish_id', dishId);
-
-    fetch('{{ route('report.store') }}', {
-        method: 'POST',
-        body: formData,
-        headers: {
-            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-        }
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log(data); // Kiểm tra phản hồi
-        if (data.success) {
-            alert('Báo cáo của bạn đã được gửi thành công.');
-            $('#myModal').modal('hide'); // Đóng modal sau khi gửi thành công
-        } else {
-            alert('Có lỗi xảy ra, vui lòng thử lại: ' + data.message);
-        }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        alert('Có lỗi xảy ra, vui lòng thử lại.');
-    });
-});
-</script> --}}
+<script>
+    
+    let mybutton = document.getElementById("myBtn");
+    
+   
+    window.onscroll = function() {scrollFunction()};
+    
+    function scrollFunction() {
+      if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        mybutton.style.display = "block";
+      } else {
+        mybutton.style.display = "none";
+      }
+    }
+    
+    
+    function topFunction() {
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
+    }
+    </script>

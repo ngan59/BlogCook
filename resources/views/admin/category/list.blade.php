@@ -1,19 +1,25 @@
 @extends('admin.layout.master')
-
 @section('title')
-    Category
+    Danh mục công thức
 @endsection
-
-<!--day view vao: dung section -->
 @section('content')
-
 <div id="page-wrapper">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">Category
-                            <small>List</small>
+                        <h1 class="page-header">Danh mục công thức nấu ăn
+                            <small>Thêm</small>
                         </h1>
+                        @if($errors->any())
+                        <div class="alert alert-danger">
+                            @foreach($errors->all() as $err)
+                                <p>{{ $err }}</p>
+                            @endforeach
+                        </div>
+                    @endif
+                    @if (session('success'))
+                        <div class="alert alert-success">{{ session('success') }}</div>
+                    @endif
                     </div>
                     @if (session('success'))
                         <div class = "alert alert-success"> {{session ('success')}}</div>       
@@ -25,8 +31,8 @@
                                 <th>ID</th>                              
                                 <th>Tên danh mục</th>
                                 <th>Slug</th>
-                                <th>Xóa</th>
                                 <th>Sửa</th>
+                                <th>Xóa</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -38,8 +44,16 @@
                                 <td>{{$key}}</td>
                                 <td>{{$category->name}}</td>
                                 <td>{{$category->slug}}</td>
-                                <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="{{route('admin.category.delete',$category->id)}}"> Xóa</a></td>
-                                <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="{{route('admin.category.edit',$category->id)}}">Sửa</a></td>
+                                <td class="center">
+                                    <a href="{{ route('admin.category.edit', $category->id) }}" class="btn btn-warning"><i class="fa fa-pencil fa-fw"></i>Sửa</a>
+                                </td>
+                                <td>
+                                    <form action="{{ route('admin.category.delete', $category->id) }}" method="POST" onsubmit="return confirm('Bạn có chắc chắn muốn xóa danh mục này?');">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger"><i class="fa fa-trash-o fa-fw"></i> Xóa</button>
+                                    </form>
+                                </td>
                             </tr>
 
                             

@@ -20,7 +20,7 @@
                             <div class="row">
                                 <div class="col-lg-6">
                                     <p><strong>ID:</strong> {{ $slide->id }}</p>
-                                    <p><strong>Tiêu Slide:</strong> {{ $slide->name }}</p>  
+                                    <p><strong>Tiêu đề Slide:</strong> {{ $slide->name }}</p>  
                                     <p><strong>Nội Dung Slide:</strong></p>
                                     <p>{!! $slide->description !!}</p>
                                 </div>

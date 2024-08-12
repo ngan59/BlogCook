@@ -13,6 +13,7 @@ class Dish extends Model
         'summary',
         'description',
         'image',
+        'video',
         'view_count',
         'user_id',
         'id_category',
@@ -40,4 +41,5 @@ class Dish extends Model
     {
         return '/image/dish/'.$this -> image;
     }
+    
 }

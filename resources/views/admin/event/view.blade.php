@@ -23,8 +23,10 @@
                                     <p><strong>Tiêu Đề:</strong> {{ $event->title }}</p>  
                                     <p><strong>Slug:</strong> {{ $event->slug }}</p>  
                                     <p><strong>Danh Mục:</strong> {{ $event->categoryevent->name }}</p>
+                                    <p><strong>Ngày Bắt Đầu:</strong> {{ \Carbon\Carbon::parse($event->start_date)->format('d/m/Y') }}</p>
+                                    <p><strong>Ngày Kết Thúc:</strong> {{ \Carbon\Carbon::parse($event->end_date)->format('d/m/Y') }}</p>
                                     <p><strong>Nội Dung:</strong></p>
-                                    <p>{!! $event->description !!}</p>
+                                    <p>{!! $event->description !!}</p>  
                                 </div>
                                 <div class="col-lg-6">
                                     <p><strong>Hình Ảnh:</strong></p>

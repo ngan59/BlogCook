@@ -17,47 +17,58 @@
                     </div>
                 @endif
                 @if (session('success'))
-                    <div class = "alert alert-success"> {{session ('success')}}</div>       
+                    <div class = "alert alert-success"> {{ session('success') }}</div>       
                 @endif
                 </div>
                 <!-- /.col-lg-12 -->
                 <div class="col-lg-7" style="padding-bottom:120px">
-                    <form action="{{ route('admin.event.update', $events->id) }}" method="POST" enctype="multipart/form-data" >
+                    <form action="{{ route('admin.event.update', $events->id) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('put')
                         <div class="form-group">
                             <label>Danh mục sự kiện</label>
-                            <select class="form-control" name="eventcategories_id" >
+                            <select class="form-control" name="eventcategories_id">
                                 @foreach ($categoriesevent as $categoryevent)
-                                {{-- kiem tra neu danh muc cua san pham nay ma bang thi minh se lay thang do   --}}
-                                <option value="{{$categoryevent->id}}" @if ($events->eventcategories_id == $categoryevent->id) selected @endif >{{ $categoryevent->name }}</option>
+                                    <option value="{{ $categoryevent->id }}" @if ($events->eventcategories_id == $categoryevent->id) selected @endif>
+                                        {{ $categoryevent->name }}
+                                    </option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="form-group">
                             <label>Tiêu đề</label>
-                            <input class="form-control" name="title" id="title" value="{{ $events->title }}" placeholder="Nhập tiêu đề sự kiện..."  onkeyup="ChangeToSlug()" />
+                            <input class="form-control" name="title" id="title" value="{{ $events->title }}" placeholder="Nhập tiêu đề sự kiện..." onkeyup="ChangeToSlug()" />
                         </div>
-                        {{-- <div class="form-group">
+                        <div class="form-group">
                             <label for="start_date">Ngày bắt đầu</label>
-                            <input type="date" class="form-control" name="start_date" value="{{ $events->start_date ? $events->start_date->format('Y-m-d') : '' }}" required>
-                        </div> --}}
+                            <input type="date" class="form-control" name="start_date" value="{{ $events->start_date }}" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="end_date">Ngày kết thúc</label>
+                            <input type="date" class="form-control" name="end_date" value="{{ $events->end_date }}" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Địa điểm</label>
+                            <input type="text" class="form-control" name="location" value="{{ $events->location }}" placeholder="Nhập địa điểm sự kiện..." required />
+                        </div>
                         <div class="form-group">
                             <label>Slug</label>
-                            <input class="form-control" name="slug" id="slug" placeholder=" " readonly />
+                            <input class="form-control" name="slug" id="slug" value="{{ $events->slug }}" readonly />
                         </div>
                         <div class="form-group">
-                            <label>Hình ảnh</label>
+                            {{-- <label>Hình ảnh hiện tại</label>
+                            <div>
+                                <img src="{{ $events->imageUrl() }}" alt="{{ $events->title }}" class="img-responsive" style="max-width: 200px; margin-bottom: 10px;">
+                            </div> --}}
                             <input type="file" class="form-control" name="image" accept="image/*" />
                         </div>
-                            <div class="form-group">
-                                <label>Nội dung</label>
-                                {{-- se lay tat ca du lieu --}}
-                                <textarea id="description" name="description" class="ckeditor">{!!$events->description!!}</textarea>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Chỉnh sửa</button>
-                            <button type="reset" class="btn btn-default">Hủy bỏ</button>
-                            <button type="reset" class="btn btn-default"> <a href="{{ route('admin.event.index')}}">Quay lại </a></button>
+                        <div class="form-group">
+                            <label>Nội dung</label>
+                            <textarea id="description" name="description" class="ckeditor">{!! $events->description !!}</textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Chỉnh sửa</button>
+                        <button type="reset" class="btn btn-default">Hủy bỏ</button>
+                        <button type="reset" class="btn btn-default"><a href="{{ route('admin.event.index') }}">Quay lại</a></button>
                     </form>
                 </div>
             </div>
@@ -66,6 +77,7 @@
         <!-- /.container-fluid -->
     </div>
 @endsection
+
 @section('script')
 <script>
     function ChangeToSlug() {
